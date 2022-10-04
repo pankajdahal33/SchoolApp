@@ -9,6 +9,7 @@ import 'package:startupapplication/controllers/attendanceController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/models/Attendance.dart';
 import 'package:startupapplication/services/base_client.dart';
+import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
 
 class StudentAttendance extends StatefulWidget {
@@ -120,10 +121,12 @@ class _StudentAttendanceState extends State<StudentAttendance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: Text('Attendance'),
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: CustomAppBar(
+          title: 'Attendance',
+          isBackButton: true,
+        ),
       ),
       body: Opacity(
         opacity: isLoading ? 0.5 : 1.0,

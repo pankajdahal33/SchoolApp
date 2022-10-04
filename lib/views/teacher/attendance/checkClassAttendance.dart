@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/attendanceController.dart';
+import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
 
 class CheckClassAttendance extends StatefulWidget {
@@ -24,9 +25,12 @@ class _CheckClassAttendanceState extends State<CheckClassAttendance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: Text("Class Attendance" + ' ' + attendanceController.date!),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: CustomAppBar(
+          title: 'Attendance',
+          isBackButton: true,
+        ),
       ),
       body: Obx(
         () => attendanceController.isLoading.value

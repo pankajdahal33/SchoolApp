@@ -12,6 +12,8 @@ abstract class Routes {
   static const CLASSATTENDANCE = _Paths.CLASSATTENDANCE;
   static const SEARCHATTENDANCE = _Paths.SEARCHATTENDANCE;
   static const CHECKCLASSATTENDANCE = _Paths.CHECKCLASSATTENDANCE;
+  static const TEACHERNOTICE = _Paths.TEACHERNOTICE;
+  static const TEACHERNOTICEDETAIL = _Paths.TEACHERNOTICEDETAIL;
 
   static const STUDENTHOME = _Paths.STUDENTHOME;
   static const STUDENTNOTIFICATION = _Paths.STUDENTNOTIFICATION;
@@ -19,6 +21,8 @@ abstract class Routes {
   static const STUDENTPROFILE = _Paths.STUDENTPROFILE;
   static const STUDENTROUTINE = _Paths.STUDENTROUTINE;
   static const STUDENTATTENDANCE = _Paths.STUDENTATTENDANCE;
+  static const STUDENTENOTICE = _Paths.STUDENTNOTICE;
+  static const STUDENTENOTICEDETAIL = _Paths.STUDENTNOTICEDETAIL;
 }
 
 abstract class _Paths {
@@ -32,6 +36,8 @@ abstract class _Paths {
   static const CLASSATTENDANCE = '/class-attendance';
   static const SEARCHATTENDANCE = '/search-attendance';
   static const CHECKCLASSATTENDANCE = '/check-class-attendance';
+  static const TEACHERNOTICE = '/teacher-notice';
+  static const TEACHERNOTICEDETAIL = '/teacher-notice-detail';
 
   static const STUDENTHOME = '/student-home';
   static const STUDENTNOTIFICATION = '/student-notification';
@@ -39,4 +45,6 @@ abstract class _Paths {
   static const STUDENTATTENDANCE = '/student-attendance';
   static const STUDENTPROFILE = '/student-profile';
   static const STUDENTROUTINE = '/student-routine';
+  static const STUDENTNOTICE = '/student-notice';
+  static const STUDENTNOTICEDETAIL = '/student-notice-detail';
 }

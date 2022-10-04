@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
+import 'package:startupapplication/views/components/custom_appBar.dart';
 
 class StudentProfile extends StatelessWidget {
   GetSharedContoller getSharedContoller = Get.find();
@@ -10,10 +11,12 @@ class StudentProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: Text(" Profile"),
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: CustomAppBar(
+          title: 'Profile',
+          isBackButton: true,
+        ),
       ),
       body: getSharedContoller.roleId == "3"
           ? Container(

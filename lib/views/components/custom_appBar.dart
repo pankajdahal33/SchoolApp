@@ -1,107 +1,145 @@
-import 'dart:io';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:startupapplication/controllers/childController.dart';
-import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
-import 'package:startupapplication/helpers/Utils.dart';
-import 'package:startupapplication/views/components/custom_appBar.dart';
-import 'package:startupapplication/views/components/loadingWidget.dart';
+import 'package:startupapplication/helpers/themeService.dart';
+import 'package:startupapplication/views/components/animation.dart';
 
-class SelectChildPage extends StatefulWidget {
-  const SelectChildPage({Key? key}) : super(key: key);
+class CustomAppBar extends StatefulWidget {
+  final String title;
+  final bool isBackButton;
+  CustomAppBar({Key? key, required this.title, required this.isBackButton})
+      : super(key: key);
 
   @override
-  State<SelectChildPage> createState() => _SelectChildPageState();
+  State<CustomAppBar> createState() => _CustomAppBarState();
 }
 
-class _SelectChildPageState extends State<SelectChildPage> {
-  GetSharedContoller getSharedContoller = Get.find();
-  ChildController childController = Get.find();
-  UserController userController = Get.find();
-  Future<bool> _willPopCallback() async {
-    showExitDialog(context);
-    return false;
-  }
+class _CustomAppBarState extends State<CustomAppBar> {
+  UserController userController = Get.put(UserController());
+  bool? isDarkMode = true;
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _willPopCallback,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
-          child: CustomAppBar(
-            title: 'Select Child',
-            isBackButton: false,
+    return Stack(
+      children: <Widget>[
+        ClipPath(
+          clipper: WaveClipper2(),
+          child: Container(
+            child: Column(),
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Theme.of(context).backgroundColor.withOpacity(0.5),
+              Theme.of(context).backgroundColor.withOpacity(0.25)
+            ])),
           ),
         ),
-        body: Center(
-          child: Obx(
-            () => childController.isLoading.value
-                ? LoadingWidget()
-                : ListView.builder(
-                    itemCount: childController.childList.data!.length,
-                    itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              minRadius: 40,
-                              backgroundImage: NetworkImage(
-                                "https://i.imgur.com/7PqjiH7.jpeg",
-                                scale: 0.5,
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  'Name: ${childController.childList.data![index].studentName}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Class: ${childController.childList.data![index].className}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Section: ${childController.childList.data![index].sectionName}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Roll No.: ${childController.childList.data![index].rollNo}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        onPressed: () async {
-                          Utils.saveStringValue(
-                              'childId',
-                              childController.childList.data![index].userId
-                                  .toString());
-                          await getSharedContoller.sharedPreferenceData();
-                          await childController.getChildInfo(childController
-                              .childList.data![index].userId
-                              .toString());
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(29, 105, 90, 107),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                            textStyle: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
-                      );
-                    },
+        ClipPath(
+          clipper: WaveClipper3(),
+          child: Container(
+            child: Column(),
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Theme.of(context).backgroundColor,
+              Theme.of(context).backgroundColor.withOpacity(0.25)
+            ])),
+          ),
+        ),
+        ClipPath(
+          clipper: WaveClipper1(),
+          child: Container(
+            child: Column(),
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Theme.of(context).backgroundColor,
+              Theme.of(context).backgroundColor
+            ])),
+          ),
+        ),
+        widget.isBackButton
+            ? Positioned(
+                child: IconButton(
+                  onPressed: (() {
+                    Get.back();
+                  }),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 35,
                   ),
-          ),
-        ),
-      ),
+                ),
+                bottom: 30,
+                left: 10)
+            : Positioned(
+                child: Image.asset(
+                  'images/logo.png',
+                  height: 60,
+                  width: 60,
+                ),
+                bottom: 30,
+                left: 10),
+        Positioned(
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: (() {
+                    ThemeService().switchTheme();
+                    setState(() {
+                      isDarkMode = !isDarkMode!;
+                    });
+                  }),
+                  icon: !isDarkMode!
+                      ? Icon(
+                          Icons.dark_mode,
+                          size: 35,
+                        )
+                      : Icon(
+                          Icons.light_mode,
+                          size: 35,
+                        ),
+                ),
+                IconButton(
+                  onPressed: (() async {
+                    showLogoutDialog(context);
+                  }),
+                  icon: Icon(
+                    Icons.logout,
+                    size: 35,
+                  ),
+                ),
+              ],
+            ),
+            bottom: 40,
+            right: 10),
+        Positioned(
+            child: Container(
+              // Background
+              child: Center(
+                child: Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width,
+            ),
+            bottom: 20,
+            right: 35),
+      ],
     );
   }
 
-  void showExitDialog(BuildContext context) {
+  void showLogoutDialog(BuildContext context) {
     Get.dialog(
       Dialog(
         backgroundColor: Colors.transparent,
@@ -143,7 +181,7 @@ class _SelectChildPageState extends State<SelectChildPage> {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    "Do you want to close this application?",
+                    "Do you want to logout?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16.0,
@@ -184,9 +222,8 @@ class _SelectChildPageState extends State<SelectChildPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16.0)),
                           color: Theme.of(context).backgroundColor,
-                          onPressed: () {
-                            if (Get.isDialogOpen!) Get.back();
-                            exit(0);
+                          onPressed: () async {
+                            userController.logout();
                           },
                           child: Padding(
                             padding:

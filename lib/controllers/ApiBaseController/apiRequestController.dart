@@ -5,6 +5,7 @@ import 'package:startupapplication/models/ClassAttendance.dart';
 import 'package:startupapplication/models/ClassStudent.dart';
 import 'package:startupapplication/models/Login.dart';
 import 'package:startupapplication/models/Attendance.dart';
+import 'package:startupapplication/models/Notice.dart';
 import 'package:startupapplication/models/Section.dart';
 import 'package:startupapplication/services/base_client.dart';
 
@@ -262,5 +263,49 @@ class ApiRequestController with BaseController {
     };
 
     BaseClient().get(apiBaseUrl, endPoint, headers).catchError(handelError);
+  }
+
+  getTeacherNoticeList({
+    String? schoolId,
+    String? token,
+  }) async {
+    var endPoint = "school/$schoolId/notice-list";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return Notice.fromJson(response);
+    }
+  }
+
+  getStudentNoticeList({
+    String? studentId,
+    String? token,
+  }) async {
+    var endPoint = "student-noticeboard/$studentId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return Notice.fromJson(response);
+    }
   }
 }

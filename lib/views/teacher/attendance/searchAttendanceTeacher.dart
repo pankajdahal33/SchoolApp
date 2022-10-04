@@ -5,6 +5,7 @@ import 'package:startupapplication/controllers/classController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/routes/app_pages.dart';
+import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
 
 class SearchAttendaceTeacher extends StatefulWidget {
@@ -22,9 +23,12 @@ class _SearchAttendaceTeacherState extends State<SearchAttendaceTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: const Text('View Attendance'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: CustomAppBar(
+          title: 'Attendance',
+          isBackButton: true,
+        ),
       ),
       body: Obx(
         () => classController.isLoading.value

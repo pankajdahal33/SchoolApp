@@ -6,10 +6,13 @@ class CardWidget extends StatelessWidget {
   final String? name;
   final Icon? icon;
   Function? onTap;
+  bool? isSelected;
+
   CardWidget({
     Key? key,
     required this.name,
     required this.icon,
+    this.isSelected,
     this.onTap,
   }) : super(key: key);
 
@@ -21,6 +24,9 @@ class CardWidget extends StatelessWidget {
           onTap!();
         },
         child: Card(
+          color: isSelected!
+              ? Theme.of(context).backgroundColor
+              : Theme.of(context).cardColor,
           elevation: 5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -29,7 +35,13 @@ class CardWidget extends StatelessWidget {
                 icon!.icon,
                 size: 50,
               ),
-              Text(name!),
+              Text(
+                name!,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
