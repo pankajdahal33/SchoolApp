@@ -3,9 +3,12 @@ import 'package:startupapplication/models/Childrens.dart';
 import 'package:startupapplication/models/Class.dart';
 import 'package:startupapplication/models/ClassAttendance.dart';
 import 'package:startupapplication/models/ClassStudent.dart';
+import 'package:startupapplication/models/Fee.dart';
+import 'package:startupapplication/models/Homework.dart';
 import 'package:startupapplication/models/Login.dart';
 import 'package:startupapplication/models/Attendance.dart';
 import 'package:startupapplication/models/Notice.dart';
+import 'package:startupapplication/models/Profile.dart';
 import 'package:startupapplication/models/Section.dart';
 import 'package:startupapplication/services/base_client.dart';
 
@@ -27,6 +30,29 @@ class ApiRequestController with BaseController {
     } else {
       // print(response);
       return Login.fromJson(response);
+    }
+  }
+
+  getProfile({
+    String? email,
+    String? password,
+    String? token,
+  }) async {
+    var endPoint = "userprofile?email=$email&password=$password";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .post(apiBaseUrl, endPoint, headers, null)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return Profile.fromJson(response);
     }
   }
 
@@ -306,6 +332,50 @@ class ApiRequestController with BaseController {
     } else {
       print(response);
       return Notice.fromJson(response);
+    }
+  }
+
+  getStudentFeeList({
+    String? studentId,
+    String? token,
+  }) async {
+    var endPoint = "fees-collect-student-wise/$studentId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return Fee.fromJson(response);
+    }
+  }
+
+  getStudentHomeworkList({
+    String? studentId,
+    String? token,
+  }) async {
+    var endPoint = "student-homework/$studentId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return Homework.fromJson(response);
     }
   }
 }

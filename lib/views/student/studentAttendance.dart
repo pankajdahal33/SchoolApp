@@ -41,13 +41,13 @@ class _StudentAttendanceState extends State<StudentAttendance> {
         if (selectedDate == null) {
           selectedDate = DateTime.now();
           attendances = getAllStudentAttendance(
-              id: getSharedContoller.childId,
+              id: 10.toString(),
               month: selectedDate.month.toString(),
               year: selectedDate.year.toString(),
               token: getSharedContoller.token);
         } else {
           attendances = getAllStudentAttendance(
-              id: getSharedContoller.childId,
+              id: 10.toString(),
               month: selectedDate.month.toString(),
               year: selectedDate.year.toString(),
               token: getSharedContoller.token);
@@ -71,13 +71,13 @@ class _StudentAttendanceState extends State<StudentAttendance> {
         if (selectedDate == null) {
           selectedDate = DateTime.now();
           attendances = getAllStudentAttendance(
-              id: getSharedContoller.attendanceStudentId,
+              id: 10.toString(),
               month: selectedDate.month.toString(),
               year: selectedDate.year.toString(),
               token: getSharedContoller.token);
         } else {
           attendances = getAllStudentAttendance(
-              id: getSharedContoller.attendanceStudentId,
+              id: 10.toString(),
               month: selectedDate.month.toString(),
               year: selectedDate.year.toString(),
               token: getSharedContoller.token);
@@ -111,9 +111,13 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     } else {
       var jsonData = jsonDecode(response);
       print(response);
-      setState(() {
-        isLoading = false;
-      });
+      if (this.mounted) {
+        // check whether the state object is in tree
+        setState(() {
+          isLoading = false;
+        });
+      }
+
       return StudentAttendanceList.fromJson(jsonData['data']['attendances']);
     }
   }
@@ -149,7 +153,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                       selectedDate = date;
                       if (getSharedContoller.roleId == "3") {
                         attendances = getAllStudentAttendance(
-                            id: getSharedContoller.childId,
+                            id: 10.toString(),
                             month: selectedDate.month.toString(),
                             year: selectedDate.year.toString(),
                             token: getSharedContoller.token);
@@ -161,7 +165,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                             token: getSharedContoller.token);
                       } else {
                         attendances = getAllStudentAttendance(
-                            id: getSharedContoller.attendanceStudentId,
+                            id: 10.toString(),
                             month: date.month.toString(),
                             year: date.year.toString(),
                             token: getSharedContoller.token);

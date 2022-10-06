@@ -31,7 +31,7 @@ class DialogHelper {
                   height: 50,
                   child: ElevatedButton(
                       onPressed: (() async {
-                        Get.back(closeOverlays: true);
+                        Get.back(closeOverlays: false);
                         if (Get.isDialogOpen!) Get.back();
                       }),
                       child: Text('OKey')),

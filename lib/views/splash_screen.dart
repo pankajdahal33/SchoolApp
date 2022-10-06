@@ -23,9 +23,11 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void checkAuth() async {
-    await getSharedContoller.sharedPreferenceData();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 3), () async {
+      getSharedContoller.sharedPreferenceData();
+      print(getSharedContoller.token);
       if (getSharedContoller.isLoggedIn == "true") {
+        //userController.getProfile();
         Timer(Duration(seconds: 3), () {
           if (getSharedContoller.roleId == "1" ||
               getSharedContoller.roleId == "4" ||

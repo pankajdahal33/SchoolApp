@@ -46,7 +46,7 @@ class Datum {
     this.rollNo,
   });
 
-  String? userId;
+  dynamic userId;
   String? studentPhoto;
   String? studentName;
   String? className;

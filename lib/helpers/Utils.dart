@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -59,6 +60,16 @@ class Utils extends GetxController {
       'Authorization': token,
     };
     return header;
+  }
+
+  static void showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      textColor: Colors.white,
+      backgroundColor: Colors.purple,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+    );
   }
 
   static BoxDecoration gradientBtnDecoration = BoxDecoration(

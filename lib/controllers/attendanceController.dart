@@ -75,8 +75,8 @@ class AttendanceController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.attendanceCheck(
-        classId: getSharedContoller.teacherClassId,
-        sectionId: getSharedContoller.teacherClassSectionId,
+        classId: 1.toString(),
+        sectionId: 1.toString(),
         date: attendanceDate,
         token: getSharedContoller.token,
       );
@@ -123,8 +123,8 @@ class AttendanceController extends GetxController {
       var response = controller.postAttendance(
         status: status,
         studentId: studentId,
-        classId: getSharedContoller.teacherClassId,
-        sectionId: getSharedContoller.teacherClassSectionId,
+        classId: 1.toString(),
+        sectionId: 1.toString(),
         date: date,
         token: getSharedContoller.token,
       );
@@ -168,30 +168,31 @@ class AttendanceController extends GetxController {
   //   }
   // }
 
-  sendNotificationToSection() async {
-    try {
-      isLoading(true);
-      var response = controller.sendNotificationToSection(
-        title: 'Attendance',
-        body: 'Attendance sunmitted',
-        classId: getSharedContoller.teacherClassId,
-        sectionId: getSharedContoller.teacherClassSectionId,
-        token: getSharedContoller.token,
-      );
-      if (response != null) {
-        print('Sucessfully send notification to section');
-        // Get.snackbar("Sucessful", "Notification sent sucessfully",
-        //     snackPosition: SnackPosition.TOP,
-        //     backgroundColor: Colors.green,
-        //     colorText: Colors.white);
-      }
-    } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
-    } finally {
-      isLoading(false);
-    }
-  }
+  // sendNotificationToSection() async {
+  //   try {
+  //     isLoading(true);
+  //     var response = controller.sendNotificationToSection(
+  //       title: 'Attendance',
+  //       body: 'Attendance sunmitted',
+  //       classId: 1.toString(),
+  //       sectionId: 1.toString(),
+  //       token: getSharedContoller.token,
+  //     );
+  //     if (response != null) {
+  //       print('Sucessfully send notification to section');
+  //       // Get.snackbar("Sucessful", "Notification sent sucessfully",
+  //       //     snackPosition: SnackPosition.TOP,
+  //       //     backgroundColor: Colors.green,
+  //       //     colorText: Colors.white);
+  //     }
+  //   } catch (e) {
+  //     Get.snackbar("Error", e.toString(),
+  //         snackPosition: SnackPosition.TOP,
+  //         backgroundColor: Colors.red,
+  //         colorText: Colors.white);
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
+
 }

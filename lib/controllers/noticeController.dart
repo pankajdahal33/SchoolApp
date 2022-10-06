@@ -20,7 +20,7 @@ class NoticeController extends GetxController {
       isLoading(true);
       await controller
           .getTeacherNoticeList(
-        schoolId: getSharedContoller.schoolId,
+        schoolId: 1.toString(),
         token: getSharedContoller.token,
       )
           .then((value) {
@@ -42,7 +42,7 @@ class NoticeController extends GetxController {
     isLoading(true);
     try {
       var response = await controller.getStudentNoticeList(
-        studentId: getSharedContoller.schoolId,
+        studentId: 10.toString(),
         token: getSharedContoller.token,
       );
       if (response != null) {

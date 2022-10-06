@@ -46,7 +46,7 @@ class ChildController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.getChildInfo(
-        childId: getSharedContoller.childId,
+        childId: 10.toString(),
         token: getSharedContoller.token,
       );
       if (response != null) {

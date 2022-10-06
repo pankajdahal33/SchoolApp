@@ -23,6 +23,7 @@ abstract class Routes {
   static const STUDENTATTENDANCE = _Paths.STUDENTATTENDANCE;
   static const STUDENTENOTICE = _Paths.STUDENTNOTICE;
   static const STUDENTENOTICEDETAIL = _Paths.STUDENTNOTICEDETAIL;
+  static const STUDENTHOMEWORK = _Paths.STUDENTHOMEWORK;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const STUDENTROUTINE = '/student-routine';
   static const STUDENTNOTICE = '/student-notice';
   static const STUDENTNOTICEDETAIL = '/student-notice-detail';
+  static const STUDENTHOMEWORK = '/student-homework';
 }

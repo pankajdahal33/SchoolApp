@@ -72,8 +72,8 @@ class ClassController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.getClassStudents(
-        classId: getSharedContoller.teacherClassId,
-        sectionId: getSharedContoller.teacherClassSectionId,
+        classId: 1.toString(),
+        sectionId: 1.toString(),
         token: getSharedContoller.token,
       );
       if (response != null) {

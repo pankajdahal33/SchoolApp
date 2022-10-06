@@ -5,6 +5,8 @@ import 'package:startupapplication/bindings/TeacherHomeBinding.dart';
 import 'package:startupapplication/bindings/UserBinding.dart';
 import 'package:startupapplication/bindings/attendanceBinding.dart';
 import 'package:startupapplication/bindings/selectChildBinding.dart';
+import 'package:startupapplication/bindings/studentFeeBinding.dart';
+import 'package:startupapplication/bindings/studentHomeworkBinding.dart';
 import 'package:startupapplication/bindings/studentNoticeBinding.dart';
 import 'package:startupapplication/bindings/studentProfileBinding.dart';
 import 'package:startupapplication/bindings/teacherAttendanceBinging.dart';
@@ -12,9 +14,11 @@ import 'package:startupapplication/bindings/teacherNoticeBinding.dart';
 import 'package:startupapplication/views/loginPage.dart';
 import 'package:startupapplication/views/parent/selectChildPage.dart';
 import 'package:startupapplication/views/splash_screen.dart';
+import 'package:startupapplication/views/student/Homework/studentHomework.dart';
 import 'package:startupapplication/views/student/Notice/studentNoticeDetailPage.dart';
 import 'package:startupapplication/views/student/Notice/studentNoticePage.dart';
 import 'package:startupapplication/views/student/studentAttendance.dart';
+import 'package:startupapplication/views/student/studentFee.dart';
 import 'package:startupapplication/views/student/studentHomePage.dart';
 import 'package:startupapplication/views/student/studentProfile.dart';
 import 'package:startupapplication/views/teacher/Notice/teacherNoticeDetailPage.dart';
@@ -109,6 +113,16 @@ class AppPages {
       name: _Paths.STUDENTNOTICEDETAIL,
       page: () => StudentNoticeDetailPage(),
       binding: StudentNoticeBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTFEE,
+      page: () => StudentFeePage(),
+      binding: StudentFeeBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTHOMEWORK,
+      page: () => StudentHomeworkPage(),
+      binding: StudentHomeworkBinding(),
     ),
   ];
 }

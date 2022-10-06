@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:startupapplication/controllers/attendanceController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 import 'package:startupapplication/routes/app_pages.dart';
@@ -15,10 +14,8 @@ class StudentHomePage extends StatefulWidget {
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
-  UserController userController = Get.find();
-  AttendanceController attendanceController = Get.find();
   GetSharedContoller getSharedContoller = Get.put(GetSharedContoller());
-
+  UserController userController = Get.find();
   Future<bool> _willPopCallback() async {
     showExitDialog(context);
     return false;
@@ -27,12 +24,21 @@ class _StudentHomePageState extends State<StudentHomePage> {
   final buttonNames = [
     "Attendance",
     "Notice",
+    "FeeS",
+    "Homework",
   ];
   final buttonIcons = [
     Icons.fingerprint,
     Icons.medical_information_sharp,
+    Icons.money,
+    Icons.home_work,
   ];
-  final buttonFunctions = [Routes.STUDENTATTENDANCE, Routes.STUDENTENOTICE];
+  final buttonFunctions = [
+    Routes.STUDENTATTENDANCE,
+    Routes.STUDENTENOTICE,
+    Routes.STUDENTFEE,
+    Routes.STUDENTHOMEWORK
+  ];
   int? currentCard;
   @override
   Widget build(BuildContext context) {
@@ -163,8 +169,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
                             ])),
                       ),
                       InkWell(
-                        onTap: (() {
-                          Get.toNamed(Routes.STUDENTPROFILE);
+                        onTap: (() async {
+                          // userController.getProfile();
+                          // Get.toNamed(Routes.STUDENTPROFILE);
                           setState(() {
                             currentIndex = 4;
                           });
