@@ -1,16 +1,12 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:startupapplication/controllers/ApiBaseController/apiRequestController.dart';
+import 'package:startupapplication/controllers/fileUp_DownlaodController.dart';
+import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/homeworkController.dart';
-import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/helpers/permission_check.dart';
 import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
+import 'package:startupapplication/views/student/Homework/uploadHomework.dart';
 
 class StudentHomeworkPage extends StatefulWidget {
   const StudentHomeworkPage({Key? key}) : super(key: key);
@@ -21,7 +17,8 @@ class StudentHomeworkPage extends StatefulWidget {
 
 class _StudentHomeworkPageState extends State<StudentHomeworkPage> {
   HomeworkController homeworkController = Get.find();
-  @override
+  UpDownlaodController upDownlaodController = Get.find();
+  GetSharedContoller getSharedContoller = Get.find();
   void initState() {
     homeworkController.getStudentHomeworkList();
     super.initState();
@@ -310,53 +307,57 @@ class _StudentHomeworkPageState extends State<StudentHomeworkPage> {
                                         ),
                                       ),
                                     ),
-                              homework.status == "incompleted"
-                                  ? InkWell(
-                                      child: Container(
-                                        color:
-                                            Theme.of(context).backgroundColor,
-                                        alignment: Alignment.center,
-                                        width:
-                                            MediaQuery.of(context).size.width /
+                              getSharedContoller.roleId == "2"
+                                  ? homework.status == "incompleted"
+                                      ? InkWell(
+                                          child: Container(
+                                            color: Theme.of(context)
+                                                .backgroundColor,
+                                            alignment: Alignment.center,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
                                                 3,
-                                        height:
-                                            MediaQuery.of(context).size.height /
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
                                                 15,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 10,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Icon(Icons.cloud_upload),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  "Upload",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyLarge,
+                                                ),
+                                              ],
                                             ),
-                                            Icon(Icons.cloud_upload),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              "Upload",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        showDialog<void>(
-                                          barrierDismissible: true,
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return Text('Upload Hw');
-                                            // return UploadHomework(
-                                            //   homework: widget.homework,
-                                            //   userID: _id,
-                                            // );
+                                          ),
+                                          onTap: () {
+                                            showDialog<void>(
+                                              barrierDismissible: true,
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return UploadHomework(
+                                                  homework: homework,
+                                                  upDownController:
+                                                      upDownlaodController,
+                                                );
+                                              },
+                                            );
                                           },
-                                        );
-                                      },
-                                    )
-                                  : Container()
+                                        )
+                                      : Container()
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -387,7 +388,8 @@ class _StudentHomeworkPageState extends State<StudentHomeworkPage> {
       child: Text("Download"),
       onPressed: () {
         homework.file != null && homework.file != ""
-            ? downloadFile(homework.file, context, homework.subjectName)
+            ? upDownlaodController.downloadFile(
+                homework.file, context, homework.subjectName)
             : Get.snackbar('Sorry', 'No attachment found',
                 backgroundColor: Colors.red,
                 colorText: Colors.white,
@@ -416,44 +418,5 @@ class _StudentHomeworkPageState extends State<StudentHomeworkPage> {
         return alert;
       },
     );
-  }
-
-  var received;
-  var download;
-
-  downloadFile(
-      String fileName, BuildContext context, String subjectName) async {
-    Dio dio = Dio();
-
-    String dirloc = "";
-    if (Platform.isAndroid) {
-      dirloc = "/sdcard/download/";
-    } else {
-      dirloc = (await getApplicationDocumentsDirectory()).path;
-    }
-
-    try {
-      Utils.showToast("Downloading...");
-
-      received = await dio.download(
-        ApiRequestController.baseUrl + fileName,
-        "$dirloc/$fileName",
-        onReceiveProgress: (receivedBytes, totalBytes) {
-          if (totalBytes != -1) {
-            print((receivedBytes / totalBytes * 100).toStringAsFixed(0) + "%");
-          }
-        },
-        //open the downloaded file after download
-      );
-      if (received.statusCode == 200) {
-        Utils.showToast(
-            "Download Completed. File is also available in your download folder.");
-        OpenFile.open("$dirloc/$fileName");
-      } else {
-        Utils.showToast("Download Failed. Please try again later.");
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 }
