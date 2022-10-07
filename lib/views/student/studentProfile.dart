@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:startupapplication/controllers/childController.dart';
+import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
@@ -13,6 +15,8 @@ class StudentProfile extends StatefulWidget {
 
 class _StudentProfileState extends State<StudentProfile> {
   UserController userController = Get.find();
+  GetSharedContoller getSharedContoller = Get.find();
+  ChildController childController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class _StudentProfileState extends State<StudentProfile> {
       body: Obx(
         () => userController.isLoading.value
             ? LoadingWidget()
-            : userController.profileData.data!.userDetails!.roleId == "3"
+            : getSharedContoller.roleId == "3"
                 ? Container(
                     child: Center(
                       child: Padding(
@@ -54,7 +58,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Name: ${userController.profileData.data!.userDetails!.fullName ?? ""}",
+                                        "Name: ${userController.profileData.data!.userDetails!.guardiansName ?? ""}",
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -64,7 +68,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                         height: 5,
                                       ),
                                       Text(
-                                        "Email: ${userController.profileData.data!.userDetails!.email ?? ""}",
+                                        "Email: ${getSharedContoller.email ?? ""}",
                                         style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -73,13 +77,13 @@ class _StudentProfileState extends State<StudentProfile> {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      // Text(
-                                      //   "Parent of : ${userController.profileData.data!.userDetails!. ?? "N/A"}",
-                                      //   style: TextStyle(
-                                      //     fontSize: 15,
-                                      //     fontWeight: FontWeight.bold,
-                                      //   ),
-                                      // ),
+                                      Text(
+                                        "Parent of : ${childController.childInfo.data!.userDetails!.fullName ?? "N/A"}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -94,185 +98,138 @@ class _StudentProfileState extends State<StudentProfile> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(Icons.child_care_outlined),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text("Name",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Text(
-                              //           "${userController.profileData.data!.userDetails!.childName ?? ""}",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //           )),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(Icons.class_outlined),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text("Class",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Text(
-                              //           "${userController.profileData.data!.userDetails!.childClass ?? ""}",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //           )),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(Icons.type_specimen),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text("Section",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Text(
-                              //           "${userController.profileData.data!.userDetails!.childSection ?? ""}",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //           )),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(
-                              //       Icons.format_list_numbered_rtl_outlined),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text("Roll No",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Text(
-                              //           "${userController.profileData.data!.userDetails!.childRollNo ?? ""}",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //           )),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(Icons.date_range_outlined),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text("Date Of Birth: ",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Flexible(
-                              //         child: Container(
-                              //           padding:
-                              //               new EdgeInsets.only(left: 13.0),
-                              //           child: Text(
-                              //               "${userController.profileData.data!.userDetails!.childDOB ?? ""}",
-                              //               overflow: TextOverflow.ellipsis,
-                              //               style: TextStyle(
-                              //                 fontSize: 15,
-                              //               )),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //   tileColor: Theme.of(context).primaryColor,
-                              //   leading: Icon(Icons.home),
-                              //   title: Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Text(" Address: ",
-                              //           style: TextStyle(
-                              //             fontSize: 15,
-                              //             fontWeight: FontWeight.bold,
-                              //           )),
-                              //       Flexible(
-                              //         child: Container(
-                              //           padding:
-                              //               new EdgeInsets.only(left: 13.0),
-                              //           child: Text(
-                              //               "${userController.profileData.data!.userDetails!.childAddress ?? ""}",
-                              //               overflow: TextOverflow.ellipsis,
-                              //               style: TextStyle(
-                              //                 fontSize: 15,
-                              //               )),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   thickness: 1,
-                              // ),
-                              // ListTile(
-                              //     tileColor: Theme.of(context).primaryColor,
-                              //     leading: Icon(Icons.bloodtype),
-                              //     title: Row(
-                              //       mainAxisAlignment:
-                              //           MainAxisAlignment.spaceBetween,
-                              //       children: [
-                              //         Text("Blood Group: ",
-                              //             style: TextStyle(
-                              //               fontSize: 15,
-                              //               fontWeight: FontWeight.bold,
-                              //             )),
-                              //         Flexible(
-                              //           child: Container(
-                              //             padding:
-                              //                 new EdgeInsets.only(left: 13.0),
-                              //             child: Text(
-                              //                 "${userController.profileData.data!.userDetails!.childBloodGroup ?? ""}",
-                              //                 overflow: TextOverflow.ellipsis,
-                              //                 style: TextStyle(
-                              //                   fontSize: 15,
-                              //                 )),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     )),
+                              ListTile(
+                                tileColor: Theme.of(context).primaryColor,
+                                leading: Icon(Icons.child_care_outlined),
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Name",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Text(
+                                        "${childController.childInfo.data!.userDetails!.fullName ?? ""}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1,
+                              ),
+                              ListTile(
+                                tileColor: Theme.of(context).primaryColor,
+                                leading: Icon(Icons.class_outlined),
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Class",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Text(
+                                        "${childController.childInfo.data!.userDetails!.className ?? ""}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1,
+                              ),
+                              ListTile(
+                                tileColor: Theme.of(context).primaryColor,
+                                leading: Icon(Icons.type_specimen),
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Section",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Text(
+                                        "${childController.childInfo.data!.userDetails!.sectionName ?? ""}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1,
+                              ),
+                              ListTile(
+                                tileColor: Theme.of(context).primaryColor,
+                                leading: Icon(
+                                    Icons.format_list_numbered_rtl_outlined),
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Roll No",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Text(
+                                        "${childController.childInfo.data!.userDetails!.rollNo ?? ""}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1,
+                              ),
+                              ListTile(
+                                tileColor: Theme.of(context).primaryColor,
+                                leading: Icon(Icons.date_range_outlined),
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Addmission Info: ",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                    Flexible(
+                                      child: Container(
+                                        padding:
+                                            new EdgeInsets.only(left: 13.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                                "No. : " +
+                                                    "${childController.childInfo.data!.userDetails!.admissionNo!}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                )),
+                                            Text(
+                                                "Date: " +
+                                                    "${childController.childInfo.data!.userDetails!.admissionDate!.toString().substring(0, 10)}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -367,11 +324,11 @@ class _StudentProfileState extends State<StudentProfile> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
                                         )),
-                                    Text(
-                                        "${userController.profileData.data!.userDetails!.dateOfBirth.toString().substring(0, 10)}",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                        )),
+                                    // Text(
+                                    //     "${userController.profileData.data!.userDetails!.dateOfBirth.toString().substring(0, 10)}",
+                                    //     style: TextStyle(
+                                    //       fontSize: 15,
+                                    //     )),
                                   ],
                                 ),
                               ),
@@ -458,36 +415,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                   ],
                                 ),
                               ),
-                              Divider(
-                                thickness: 1,
-                              ),
-                              ListTile(
-                                tileColor: Theme.of(context).primaryColor,
-                                leading: Icon(Icons.bloodtype),
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Blood Group: ",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    Flexible(
-                                      child: Container(
-                                        padding:
-                                            new EdgeInsets.only(left: 13.0),
-                                        child: Text(
-                                            "${userController.profileData.data!.userDetails!.bloodgroupId ?? ""}",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                            )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+
                               Divider(
                                 thickness: 1,
                               ),

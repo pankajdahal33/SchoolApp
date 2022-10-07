@@ -3,7 +3,7 @@ import 'package:startupapplication/controllers/childController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 
-class StudentProfileBinding extends Bindings {
+class TeacherProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UserController>(

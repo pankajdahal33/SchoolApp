@@ -67,7 +67,7 @@ class _CheckClassAttendanceState extends State<CheckClassAttendance> {
                             ),
                           ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.80,
+                      height: MediaQuery.of(context).size.height * 0.75,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: attendanceController

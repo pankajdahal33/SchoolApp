@@ -23,27 +23,29 @@ class AttendanceController extends GetxController {
   var classAttendanceList = ClassAttendance();
   var attendanceDone = false.obs;
 
-  getStudentAttendance(DateTime? date) async {
-    try {
-      isLoading(true);
-      var response = await controller.getstudentAttendance(
-        studentId: getSharedContoller.userId,
-        month: date!.month.toString(),
-        year: date.year.toString(),
-        token: getSharedContoller.token,
-      );
-      if (response != null) {
-        studentAttendanceData = response;
-      }
-    } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
-    } finally {
-      isLoading(false);
-    }
-  }
+  // getStudentAttendance(DateTime? date) async {
+  //   try {
+  //     isLoading(true);
+  //     var response = await controller.getstudentAttendance(
+  //       studentId: getSharedContoller.roleId == "2"
+  //           ? getSharedContoller.userId
+  //           : getSharedContoller.childId,
+  //       month: date!.month.toString(),
+  //       year: date.year.toString(),
+  //       token: getSharedContoller.token,
+  //     );
+  //     if (response != null) {
+  //       studentAttendanceData = response;
+  //     }
+  //   } catch (e) {
+  //     Get.snackbar("Error", e.toString(),
+  //         snackPosition: SnackPosition.TOP,
+  //         backgroundColor: Colors.red,
+  //         colorText: Colors.white);
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
 
   String getAttendanceStatus(int date, List<AttendanceElement> attendances) {
     return getStatus(0, attendances.length - 1, attendances, date);
@@ -180,10 +182,7 @@ class AttendanceController extends GetxController {
   //     );
   //     if (response != null) {
   //       print('Sucessfully send notification to section');
-  //       // Get.snackbar("Sucessful", "Notification sent sucessfully",
-  //       //     snackPosition: SnackPosition.TOP,
-  //       //     backgroundColor: Colors.green,
-  //       //     colorText: Colors.white);
+
   //     }
   //   } catch (e) {
   //     Get.snackbar("Error", e.toString(),

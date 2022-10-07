@@ -11,6 +11,7 @@ import 'package:startupapplication/bindings/studentNoticeBinding.dart';
 import 'package:startupapplication/bindings/studentProfileBinding.dart';
 import 'package:startupapplication/bindings/teacherAttendanceBinging.dart';
 import 'package:startupapplication/bindings/teacherNoticeBinding.dart';
+import 'package:startupapplication/bindings/teacherProfileBinding.dart';
 import 'package:startupapplication/views/loginPage.dart';
 import 'package:startupapplication/views/parent/selectChildPage.dart';
 import 'package:startupapplication/views/splash_screen.dart';
@@ -29,6 +30,7 @@ import 'package:startupapplication/views/teacher/attendance/searchAttendanceTeac
 import 'package:startupapplication/views/teacher/attendance/teacherAttendance.dart';
 
 import 'package:startupapplication/views/teacher/teacherHomePage.dart';
+import 'package:startupapplication/views/teacher/teacherProfile.dart';
 
 part 'app_routes.dart';
 
@@ -88,6 +90,11 @@ class AppPages {
       name: _Paths.SEARCHATTENDANCE,
       page: () => SearchAttendaceTeacher(),
       binding: TeacherAttendanceBinding(),
+    ),
+    GetPage(
+      name: _Paths.TEACHERPROFILE,
+      page: () => TeacherProfile(),
+      binding: TeacherProfileBinding(),
     ),
     GetPage(
       name: _Paths.STUDENTHOME,

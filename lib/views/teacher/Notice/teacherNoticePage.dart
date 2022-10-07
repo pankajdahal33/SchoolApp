@@ -37,63 +37,70 @@ class _TeacherNoticePageState extends State<TeacherNoticePage> {
             ? LoadingWidget()
             : noticeController.teacherNoticeList.data == null
                 ? Text('No Data Found')
-                : ListView.builder(
-                    itemCount: noticeController
-                        .teacherNoticeList.data!.allNotices!.length,
-                    itemBuilder: (context, i) {
-                      var notice = noticeController
-                          .teacherNoticeList.data!.allNotices![i];
-                      return Card(
-                        child: ListTile(
-                          title: Container(
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 35,
-                                  backgroundColor:
-                                      Theme.of(context).backgroundColor,
-                                  child: Icon(
-                                    Icons.notifications,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                : noticeController.teacherNoticeList.data!.length == 0
+                    ? Text('No Data Found')
+                    : ListView.builder(
+                        itemCount:
+                            noticeController.teacherNoticeList.data!.length,
+                        itemBuilder: (context, i) {
+                          var notice =
+                              noticeController.teacherNoticeList.data![i];
+                          return Card(
+                            child: ListTile(
+                              title: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1,
+                                child: Row(
                                   children: [
-                                    Text(
-                                      notice.noticeDate!
-                                          .toString()
-                                          .substring(0, 10),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
+                                    CircleAvatar(
+                                      radius: 35,
+                                      backgroundColor:
+                                          Theme.of(context).backgroundColor,
+                                      child: Icon(
+                                        Icons.notifications,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                    Text(
-                                      notice.noticeTitle!.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w400),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          notice.noticeDate!
+                                              .toString()
+                                              .substring(0, 10),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          notice.noticeTitle!.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  Get.toNamed(
+                                    Routes.TEACHERNOTICEDETAIL,
+                                    arguments: notice,
+                                  );
+                                },
+                                icon: Icon(Icons.arrow_forward_ios),
+                              ),
                             ),
-                          ),
-                          trailing: IconButton(
-                            onPressed: () {
-                              Get.toNamed(Routes.STUDENTENOTICEDETAIL);
-                            },
-                            icon: Icon(Icons.arrow_forward_ios),
-                          ),
-                        ),
-                      );
-                    }),
+                          );
+                        }),
       )),
     );
   }

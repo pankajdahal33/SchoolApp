@@ -172,7 +172,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                       InkWell(
                         onTap: (() async {
                           // userController.getProfile();
-                          // Get.toNamed(Routes.STUDENTPROFILE);
+                          Get.toNamed(Routes.STUDENTPROFILE);
                           setState(() {
                             currentIndex = 4;
                           });

@@ -30,8 +30,6 @@ class ClassController extends GetxController {
       );
       if (response != null) {
         classList = response;
-        await getTeacherClassSection(
-            classList.data!.teacherClasses![0].classId!);
       }
     } catch (e) {
       Get.snackbar("Error", e.toString(),
@@ -43,20 +41,19 @@ class ClassController extends GetxController {
     }
   }
 
-  getTeacherClassSection(classId) async {
+  getTeacherClassSection() async {
     try {
       isLoadingSection(true);
       var response = await controller.getTeacherClassSection(
         teacherId: getSharedContoller.userId,
-        classId: classId,
+        classId: getSharedContoller.teacherClassId,
         token: getSharedContoller.token,
       );
       if (response != null) {
         classSectionList = response;
         Utils.saveStringValue('teacherClassSectionId',
-            classSectionList.data!.teacherSections![0].sectionId!);
+            classSectionList.data!.teacherSections!.first.sectionId!);
         await getSharedContoller.sharedPreferenceData();
-        await getClassStudents();
       }
     } catch (e) {
       Get.snackbar("Error", e.toString(),
@@ -72,18 +69,15 @@ class ClassController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.getClassStudents(
-        classId: 1.toString(),
-        sectionId: 1.toString(),
+        classId: getSharedContoller.teacherClassId,
+        sectionId: getSharedContoller.teacherClassSectionId,
         token: getSharedContoller.token,
       );
       if (response != null) {
         classStudentList = response;
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      Utils.showToast(e.toString());
     } finally {
       isLoading(false);
     }

@@ -14,6 +14,7 @@ abstract class Routes {
   static const CHECKCLASSATTENDANCE = _Paths.CHECKCLASSATTENDANCE;
   static const TEACHERNOTICE = _Paths.TEACHERNOTICE;
   static const TEACHERNOTICEDETAIL = _Paths.TEACHERNOTICEDETAIL;
+  static const TEACHERPROFILE = _Paths.TEACHERPROFILE;
 
   static const STUDENTHOME = _Paths.STUDENTHOME;
   static const STUDENTNOTIFICATION = _Paths.STUDENTNOTIFICATION;
@@ -39,6 +40,7 @@ abstract class _Paths {
   static const CHECKCLASSATTENDANCE = '/check-class-attendance';
   static const TEACHERNOTICE = '/teacher-notice';
   static const TEACHERNOTICEDETAIL = '/teacher-notice-detail';
+  static const TEACHERPROFILE = '/teacher-profile';
 
   static const STUDENTHOME = '/student-home';
   static const STUDENTNOTIFICATION = '/student-notification';

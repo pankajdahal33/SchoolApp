@@ -26,6 +26,12 @@ class _SelectChildPageState extends State<SelectChildPage> {
   }
 
   @override
+  void initState() {
+    childController.getChildList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _willPopCallback,
@@ -46,15 +52,20 @@ class _SelectChildPageState extends State<SelectChildPage> {
                     itemBuilder: (context, index) {
                       return ElevatedButton(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             CircleAvatar(
-                              minRadius: 40,
+                              minRadius: 35,
                               backgroundImage: NetworkImage(
                                 "https://i.imgur.com/7PqjiH7.jpeg",
                                 scale: 0.5,
                               ),
                             ),
+                            const SizedBox(
+                              width: 20,
+                            ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Name: ${childController.childList.data![index].studentName}',
@@ -81,10 +92,12 @@ class _SelectChildPageState extends State<SelectChildPage> {
                               'childId',
                               childController.childList.data![index].userId
                                   .toString());
+                          Utils.saveStringValue(
+                              'childName',
+                              childController.childList.data![index].studentName
+                                  .toString());
                           await getSharedContoller.sharedPreferenceData();
-                          await childController.getChildInfo(childController
-                              .childList.data![index].userId
-                              .toString());
+                          await childController.getChildInfo();
                         },
                         style: ElevatedButton.styleFrom(
                             primary: Color.fromARGB(29, 105, 90, 107),

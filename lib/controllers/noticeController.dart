@@ -4,6 +4,7 @@ import 'package:startupapplication/controllers/ApiBaseController/apiRequestContr
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 import 'package:startupapplication/models/Notice.dart';
+import 'package:startupapplication/models/TeacherNotice.dart';
 
 class NoticeController extends GetxController {
   ApiRequestController controller = ApiRequestController();
@@ -12,7 +13,7 @@ class NoticeController extends GetxController {
   String? classId;
 
   var isLoading = false.obs;
-  var teacherNoticeList = Notice();
+  var teacherNoticeList = TeacherNotice();
   var studentNoticeList = Notice();
 
   getTeacherNoticeList() async {
@@ -20,7 +21,7 @@ class NoticeController extends GetxController {
       isLoading(true);
       await controller
           .getTeacherNoticeList(
-        schoolId: 1.toString(),
+        schoolId: getSharedContoller.schoolId,
         token: getSharedContoller.token,
       )
           .then((value) {
@@ -42,7 +43,9 @@ class NoticeController extends GetxController {
     isLoading(true);
     try {
       var response = await controller.getStudentNoticeList(
-        studentId: 10.toString(),
+        studentId: getSharedContoller.roleId == "3"
+            ? getSharedContoller.childId
+            : getSharedContoller.userId,
         token: getSharedContoller.token,
       );
       if (response != null) {

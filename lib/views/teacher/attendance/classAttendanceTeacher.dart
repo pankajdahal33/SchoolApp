@@ -19,12 +19,14 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
   ClassController classController = Get.find();
   GetSharedContoller getSharedContoller = Get.find();
   AttendanceController attendanceController = Get.find();
-  var dropdownValue;
+  var selectedClass;
+  var selectedSection;
   TextEditingController dateInput = TextEditingController();
 
   @override
   void initState() {
     dateInput.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    classController.getClassList();
     super.initState();
   }
 
@@ -32,7 +34,6 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
 
   @override
   Widget build(BuildContext context) {
-    classController.getClassList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
@@ -56,7 +57,7 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                         child: DropdownButton<String>(
                           hint: Text('Select Class',
                               style: Theme.of(context).textTheme.headline4),
-                          value: dropdownValue,
+                          value: selectedClass,
                           icon: const Icon(Icons.arrow_drop_down),
                           isExpanded: true,
                           iconSize: 24,
@@ -69,26 +70,30 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                               .textTheme
                               .headline4!
                               .copyWith(color: Theme.of(context).primaryColor),
-                          onChanged: (String? newValue) {
+                          onChanged: (String? newValue) async {
                             setState(() {
-                              dropdownValue = newValue!;
-                              Utils.saveStringValue(
-                                  'teacherClassId', dropdownValue);
+                              selectedClass = newValue!;
                             });
-                            getSharedContoller.sharedPreferenceData();
+                            Utils.saveStringValue(
+                                'teacherClassId', selectedClass);
+                            await getSharedContoller.sharedPreferenceData();
+                            classController.getTeacherClassSection();
                           },
-                          items: classController.classList.data!.teacherClasses!
-                              .map<DropdownMenuItem<String>>((value) {
-                            return DropdownMenuItem<String>(
-                              value: value.classId.toString(),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(value.className.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.headline4),
-                              ),
-                            );
-                          }).toList(),
+                          items: classController.classList.data != null
+                              ? classController.classList.data!.teacherClasses!
+                                  .map<DropdownMenuItem<String>>((value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value.classId.toString(),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(value.className.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4),
+                                    ),
+                                  );
+                                }).toList()
+                              : [],
                         ),
                       ),
                     ),
@@ -109,7 +114,7 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                                 hint: Text('Select Section',
                                     style:
                                         Theme.of(context).textTheme.headline4),
-                                value: dropdownValue,
+                                value: selectedSection,
                                 icon: const Icon(Icons.arrow_drop_down),
                                 isExpanded: true,
                                 iconSize: 24,
@@ -125,26 +130,31 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                                         color: Theme.of(context).primaryColor),
                                 onChanged: (String? newValue) {
                                   setState(() {
-                                    dropdownValue = newValue!;
+                                    selectedSection = newValue!;
                                   });
                                   Utils.saveStringValue(
-                                      'teacherClassSectionId', dropdownValue);
+                                      'teacherClassSectionId', selectedSection);
                                   getSharedContoller.sharedPreferenceData();
                                 },
-                                items: classController
-                                    .classSectionList.data!.teacherSections!
-                                    .map<DropdownMenuItem<String>>((value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value.sectionId.toString(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(value.sectionName.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline4),
-                                    ),
-                                  );
-                                }).toList(),
+                                items: classController.classSectionList.data !=
+                                        null
+                                    ? classController
+                                        .classSectionList.data!.teacherSections!
+                                        .map<DropdownMenuItem<String>>((value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value.sectionId.toString(),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text(
+                                                value.sectionName.toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4),
+                                          ),
+                                        );
+                                      }).toList()
+                                    : [],
                               ),
                             ),
                           ),

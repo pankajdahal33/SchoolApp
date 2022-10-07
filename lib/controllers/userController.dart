@@ -50,13 +50,10 @@ class UserController extends GetxController {
               " roleID=" +
               getSharedContoller.roleId!,
         );
-        //getProfile();
+        getProfile();
         //Sucess snackbar
         if (loginData.success! == true) {
-          Get.snackbar("Success", loginData.message!,
-              snackPosition: SnackPosition.TOP,
-              backgroundColor: Colors.green,
-              colorText: Colors.white);
+          Utils.showToast(loginData.message!);
           if (loginData.data!.roleId == "1" ||
               loginData.data!.roleId == "4" ||
               loginData.data!.roleId == "5") {
@@ -67,17 +64,11 @@ class UserController extends GetxController {
             Get.toNamed(Routes.SELECTCHILD);
           }
         } else {
-          Get.snackbar("Error", loginData.message!,
-              snackPosition: SnackPosition.TOP,
-              backgroundColor: Colors.red,
-              colorText: Colors.white);
+          Utils.showToast(loginData.message!);
         }
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      Utils.showToast(loginData.message!);
     } finally {
       isLoading(false);
     }
@@ -93,8 +84,7 @@ class UserController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.getProfile(
-        email: getSharedContoller.email,
-        password: getSharedContoller.password,
+        userId: getSharedContoller.userId,
         token: getSharedContoller.token,
       );
 
@@ -102,6 +92,8 @@ class UserController extends GetxController {
         profileData = response;
         Utils.saveStringValue(
             'schoolId', profileData.data!.userDetails!.schoolId!.toString());
+        await getSharedContoller.sharedPreferenceData();
+        print(" SchoolId =" + getSharedContoller.schoolId!);
       }
     } catch (e) {
       Get.snackbar("Error", e.toString(),

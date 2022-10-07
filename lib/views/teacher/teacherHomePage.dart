@@ -132,7 +132,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                       ),
                       InkWell(
                         onTap: (() {
-                          // Get.toNamed(Routes.STUDENTPROFILE);
+                          Get.toNamed(Routes.TEACHERPROFILE);
                         }),
                         child: Container(
                             child: Column(

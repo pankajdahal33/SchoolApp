@@ -27,7 +27,7 @@ class SplashScreenState extends State<SplashScreen> {
       getSharedContoller.sharedPreferenceData();
       print(getSharedContoller.token);
       if (getSharedContoller.isLoggedIn == "true") {
-        //userController.getProfile();
+        userController.getProfile();
         Timer(Duration(seconds: 3), () {
           if (getSharedContoller.roleId == "1" ||
               getSharedContoller.roleId == "4" ||

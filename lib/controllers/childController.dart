@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:startupapplication/controllers/ApiBaseController/apiRequestController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
+import 'package:startupapplication/models/ChildInfo.dart';
 import 'package:startupapplication/models/Childrens.dart';
-import 'package:startupapplication/models/Login.dart';
 import 'package:startupapplication/routes/app_pages.dart';
 
 class ChildController extends GetxController {
@@ -14,13 +14,13 @@ class ChildController extends GetxController {
 
   var isLoading = false.obs;
   var childList = Childrens();
-  var childInfo = Login();
+  var childInfo = ChildInfo();
 
-  @override
-  void onInit() {
-    getChildList();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   getChildList();
+  //   super.onInit();
+  // }
 
   getChildList() async {
     try {
@@ -42,11 +42,11 @@ class ChildController extends GetxController {
     }
   }
 
-  getChildInfo(String childId) async {
+  getChildInfo() async {
     try {
       isLoading(true);
       var response = await controller.getChildInfo(
-        childId: 10.toString(),
+        childId: getSharedContoller.childId,
         token: getSharedContoller.token,
       );
       if (response != null) {
