@@ -4,12 +4,14 @@ import 'package:startupapplication/bindings/StudentHomeBinding.dart';
 import 'package:startupapplication/bindings/TeacherHomeBinding.dart';
 import 'package:startupapplication/bindings/UserBinding.dart';
 import 'package:startupapplication/bindings/attendanceBinding.dart';
+import 'package:startupapplication/bindings/notificationBinding.dart';
 import 'package:startupapplication/bindings/selectChildBinding.dart';
 import 'package:startupapplication/bindings/studentFeeBinding.dart';
 import 'package:startupapplication/bindings/studentHomeworkBinding.dart';
 import 'package:startupapplication/bindings/studentNoticeBinding.dart';
 import 'package:startupapplication/bindings/studentProfileBinding.dart';
 import 'package:startupapplication/bindings/teacherAttendanceBinging.dart';
+import 'package:startupapplication/bindings/teacherHomeworkBinding.dart';
 import 'package:startupapplication/bindings/teacherNoticeBinding.dart';
 import 'package:startupapplication/bindings/teacherProfileBinding.dart';
 import 'package:startupapplication/views/loginPage.dart';
@@ -21,7 +23,11 @@ import 'package:startupapplication/views/student/Notice/studentNoticePage.dart';
 import 'package:startupapplication/views/student/studentAttendance.dart';
 import 'package:startupapplication/views/student/studentFee.dart';
 import 'package:startupapplication/views/student/studentHomePage.dart';
+import 'package:startupapplication/views/student/studentNotificatiion.dart';
 import 'package:startupapplication/views/student/studentProfile.dart';
+import 'package:startupapplication/views/teacher/Homework/addHomeWork.dart';
+import 'package:startupapplication/views/teacher/Homework/homeworkList.dart';
+import 'package:startupapplication/views/teacher/Homework/teacherHomework.dart';
 import 'package:startupapplication/views/teacher/Notice/teacherNoticeDetailPage.dart';
 import 'package:startupapplication/views/teacher/Notice/teacherNoticePage.dart';
 import 'package:startupapplication/views/teacher/attendance/checkClassAttendance.dart';
@@ -30,6 +36,7 @@ import 'package:startupapplication/views/teacher/attendance/searchAttendanceTeac
 import 'package:startupapplication/views/teacher/attendance/teacherAttendance.dart';
 
 import 'package:startupapplication/views/teacher/teacherHomePage.dart';
+import 'package:startupapplication/views/teacher/teacherNotificatiion.dart';
 import 'package:startupapplication/views/teacher/teacherProfile.dart';
 
 part 'app_routes.dart';
@@ -97,6 +104,26 @@ class AppPages {
       binding: TeacherProfileBinding(),
     ),
     GetPage(
+      name: _Paths.TEACHERHOMEWORKPAGE,
+      page: () => TeacherHomework(),
+      binding: TeacherHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADDHOMEWORK,
+      page: () => AddHomework(),
+      binding: TeacherHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOMEWORKLIST,
+      page: () => ViewHomeworkList(),
+      binding: TeacherHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.TEACHERNOTIFICATION,
+      page: () => TeacherNotification(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
       name: _Paths.STUDENTHOME,
       page: () => StudentHomePage(),
       binding: StudentHomeBinding(),
@@ -130,6 +157,11 @@ class AppPages {
       name: _Paths.STUDENTHOMEWORK,
       page: () => StudentHomeworkPage(),
       binding: StudentHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTNOTIFICATION,
+      page: () => StudentNotification(),
+      binding: NotificationBinding(),
     ),
   ];
 }

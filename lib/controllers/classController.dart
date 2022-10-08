@@ -20,6 +20,7 @@ class ClassController extends GetxController {
   var classList = Class();
   var classSectionList = Section();
   var classStudentList = ClassStudent();
+  var classTeacherSubjectList;
 
   getClassList() async {
     try {
@@ -75,6 +76,23 @@ class ClassController extends GetxController {
       );
       if (response != null) {
         classStudentList = response;
+      }
+    } catch (e) {
+      Utils.showToast(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getTeacherAllSubject() {
+    try {
+      isLoading(true);
+      var response = controller.getTeacherAllSubject(
+        teacherId: getSharedContoller.userId,
+        token: getSharedContoller.token,
+      );
+      if (response != null) {
+        classTeacherSubjectList = response;
       }
     } catch (e) {
       Utils.showToast(e.toString());

@@ -15,6 +15,10 @@ abstract class Routes {
   static const TEACHERNOTICE = _Paths.TEACHERNOTICE;
   static const TEACHERNOTICEDETAIL = _Paths.TEACHERNOTICEDETAIL;
   static const TEACHERPROFILE = _Paths.TEACHERPROFILE;
+  static const TEACHERHOMEWORKPAGE = _Paths.TEACHERHOMEWORKPAGE;
+  static const ADDHOMEWORK = _Paths.ADDHOMEWORK;
+  static const HOMEWORKLIST = _Paths.HOMEWORKLIST;
+  static const TEACHERNOTIFICATION = _Paths.TEACHERNOTIFICATION;
 
   static const STUDENTHOME = _Paths.STUDENTHOME;
   static const STUDENTNOTIFICATION = _Paths.STUDENTNOTIFICATION;
@@ -41,6 +45,10 @@ abstract class _Paths {
   static const TEACHERNOTICE = '/teacher-notice';
   static const TEACHERNOTICEDETAIL = '/teacher-notice-detail';
   static const TEACHERPROFILE = '/teacher-profile';
+  static const TEACHERHOMEWORKPAGE = '/teacher-homework-page';
+  static const ADDHOMEWORK = '/add-homework';
+  static const HOMEWORKLIST = '/homework-list';
+  static const TEACHERNOTIFICATION = '/teacher-notification';
 
   static const STUDENTHOME = '/student-home';
   static const STUDENTNOTIFICATION = '/student-notification';

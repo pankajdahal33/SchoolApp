@@ -30,6 +30,7 @@ class CardWidget extends StatelessWidget {
           elevation: 5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 icon!.icon,
@@ -38,7 +39,7 @@ class CardWidget extends StatelessWidget {
               Text(
                 name!,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),

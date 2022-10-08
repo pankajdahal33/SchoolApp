@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/ApiBaseController/apiRequestController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
+import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/models/Homework.dart';
 
 class HomeworkController extends GetxController {
@@ -12,6 +12,7 @@ class HomeworkController extends GetxController {
   var isLoading = false.obs;
 
   var studentHomeworkList = Homework();
+  var teachertHomeworkList;
 
   getStudentHomeworkList() async {
     isLoading(true);
@@ -24,10 +25,24 @@ class HomeworkController extends GetxController {
         studentHomeworkList = response;
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      Utils.showToast(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  getTeacherHomeworkList() {
+    isLoading(true);
+    try {
+      var response = controller.getTeacherHomeworkList(
+        teacherId: getSharedContoller.userId,
+        token: getSharedContoller.token,
+      );
+      if (response != null) {
+        teachertHomeworkList = response;
+      }
+    } catch (e) {
+      Utils.showToast(e.toString());
     } finally {
       isLoading(false);
     }

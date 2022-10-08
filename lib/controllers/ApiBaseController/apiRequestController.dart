@@ -9,6 +9,7 @@ import 'package:startupapplication/models/Homework.dart';
 import 'package:startupapplication/models/Login.dart';
 import 'package:startupapplication/models/Attendance.dart';
 import 'package:startupapplication/models/Notice.dart';
+import 'package:startupapplication/models/Notification.dart';
 import 'package:startupapplication/models/Profile.dart';
 import 'package:startupapplication/models/Section.dart';
 import 'package:startupapplication/models/TeacherNotice.dart';
@@ -166,6 +167,28 @@ class ApiRequestController with BaseController {
     } else {
       print(response);
       return Section.fromJson(response);
+    }
+  }
+
+  getTeacherAllSubject({
+    String? teacherId,
+    String? token,
+  }) async {
+    var endPoint = "subject/$teacherId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      //return Section.fromJson(response);
     }
   }
 
@@ -335,6 +358,71 @@ class ApiRequestController with BaseController {
     }
   }
 
+  getMyNotification({
+    String? userId,
+    String? token,
+  }) async {
+    var endPoint = "myNotification/$userId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return MyNotification.fromJson(response);
+    }
+  }
+
+  markAsReadNotification({
+    String? userId,
+    String? notificationId,
+    String? token,
+  }) async {
+    var endPoint = "viewNotification/$userId/$notificationId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return;
+      //return MyNotification.fromJson(response);
+    }
+  }
+
+  markReadAllNotification({String? userId, String? token}) async {
+    var endPoint = "viewAllNotification/$userId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return;
+    }
+  }
+
   getStudentFeeList({
     String? studentId,
     String? token,
@@ -376,6 +464,28 @@ class ApiRequestController with BaseController {
     } else {
       print(response);
       return Homework.fromJson(response);
+    }
+  }
+
+  getTeacherHomeworkList({
+    String? teacherId,
+    String? token,
+  }) async {
+    var endPoint = "homework-list/$teacherId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      //return TeacherHomework.fromJson(response);
     }
   }
 }

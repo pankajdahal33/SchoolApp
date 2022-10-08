@@ -110,6 +110,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                       ),
                       InkWell(
                         onTap: (() {
+                          Get.toNamed(Routes.STUDENTNOTIFICATION);
                           setState(() {
                             currentIndex = 1;
                           });

@@ -27,12 +27,18 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
   final buttonNames = [
     "Attendance",
     "Notice",
+    "HomeWork",
   ];
   final buttonIcons = [
     Icons.fingerprint,
     Icons.medical_information_sharp,
+    Icons.home_work,
   ];
-  final buttonFunctions = [Routes.ATTENDANCETEACHER, Routes.TEACHERNOTICE];
+  final buttonFunctions = [
+    Routes.ATTENDANCETEACHER,
+    Routes.TEACHERNOTICE,
+    Routes.TEACHERHOMEWORKPAGE
+  ];
   int? currentCard;
   @override
   Widget build(BuildContext context) {
@@ -98,7 +104,9 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                             ])),
                       ),
                       InkWell(
-                        onTap: (() {}),
+                        onTap: (() {
+                          Get.toNamed(Routes.TEACHERNOTIFICATION);
+                        }),
                         child: Container(
                             child: Column(
                                 mainAxisAlignment:
@@ -109,14 +117,16 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                             ])),
                       ),
                       InkWell(
-                        onTap: (() {}),
+                        onTap: (() {
+                          Get.toNamed(Routes.ATTENDANCETEACHER);
+                        }),
                         child: Container(
                             child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                              Icon(Icons.payments),
-                              Text('Fees')
+                              Icon(Icons.fingerprint),
+                              Text('Attendance')
                             ])),
                       ),
                       InkWell(

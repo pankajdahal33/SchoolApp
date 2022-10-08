@@ -77,8 +77,8 @@ class AttendanceController extends GetxController {
     try {
       isLoading(true);
       var response = await controller.attendanceCheck(
-        classId: 1.toString(),
-        sectionId: 1.toString(),
+        classId: getSharedContoller.teacherClassId,
+        sectionId: getSharedContoller.teacherClassSectionId,
         date: attendanceDate,
         token: getSharedContoller.token,
       );
@@ -125,8 +125,8 @@ class AttendanceController extends GetxController {
       var response = controller.postAttendance(
         status: status,
         studentId: studentId,
-        classId: 1.toString(),
-        sectionId: 1.toString(),
+        classId: getSharedContoller.teacherClassId,
+        sectionId: getSharedContoller.teacherClassSectionId,
         date: date,
         token: getSharedContoller.token,
       );
@@ -176,8 +176,8 @@ class AttendanceController extends GetxController {
   //     var response = controller.sendNotificationToSection(
   //       title: 'Attendance',
   //       body: 'Attendance sunmitted',
-  //       classId: 1.toString(),
-  //       sectionId: 1.toString(),
+  //       classId: getSharedContoller.teacherClassId,
+  //       sectionId: getSharedContoller.teacherClassSectionId,
   //       token: getSharedContoller.token,
   //     );
   //     if (response != null) {

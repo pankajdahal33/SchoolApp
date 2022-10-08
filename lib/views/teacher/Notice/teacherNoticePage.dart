@@ -67,6 +67,8 @@ class _TeacherNoticePageState extends State<TeacherNoticePage> {
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           notice.noticeDate!
