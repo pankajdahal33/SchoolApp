@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/userController.dart';
+import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/views/components/animation.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
 
@@ -262,23 +263,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 32),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
-                            color: Theme.of(context).backgroundColor,
-                          ),
-                          // ignore: deprecated_member_use
-                          child: FlatButton(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18),
-                            ),
-                            onPressed: () async {
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: InkWell(
+                            onTap: (() async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
                                 try {
@@ -287,7 +275,18 @@ class _LoginPageState extends State<LoginPage> {
                                   print(e.toString());
                                 }
                               }
-                            },
+                            }),
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: Utils.gradientBtnDecoration,
+                              child: Text('Login',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700)),
+                            ),
                           ),
                         ),
                       ),
@@ -353,49 +352,40 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Align(
                         alignment: Alignment.bottomRight,
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
-                          onPressed: () {
+                        child: InkWell(
+                          onTap: (() {
                             Get.back();
-                            //Navigator.of(context).pop();
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Text(
-                              "   No   ",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
+                          }),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: Utils.gradientBtnDecoration,
+                            child: Text('No',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
-                          onPressed: () {
+                        child: InkWell(
+                          onTap: (() {
                             if (Get.isDialogOpen!) Get.back();
                             exit(0);
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text(
-                              " YES ",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
+                          }),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: Utils.gradientBtnDecoration,
+                            child: Text('Yes',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),

@@ -257,10 +257,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                       Align(
                         alignment: Alignment.bottomRight,
                         // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
+                        child: ElevatedButton(
                           onPressed: () {
                             Get.back();
                             //Navigator.of(context).pop();
@@ -281,10 +278,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                       Align(
                         alignment: Alignment.bottomRight,
                         // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
+                        child: ElevatedButton(
                           onPressed: () {
                             if (Get.isDialogOpen!) Get.back();
                             exit(0);

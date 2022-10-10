@@ -50,44 +50,8 @@ class _SelectChildPageState extends State<SelectChildPage> {
                 : ListView.builder(
                     itemCount: childController.childList.data!.length,
                     itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              minRadius: 35,
-                              backgroundImage: NetworkImage(
-                                "https://i.imgur.com/7PqjiH7.jpeg",
-                                scale: 0.5,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Name: ${childController.childList.data![index].studentName}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Class: ${childController.childList.data![index].className}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Section: ${childController.childList.data![index].sectionName}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                                Text(
-                                  'Roll No.: ${childController.childList.data![index].rollNo}',
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        onPressed: () async {
+                      return InkWell(
+                        onTap: (() async {
                           Utils.saveStringValue(
                               'childId',
                               childController.childList.data![index].userId
@@ -98,13 +62,54 @@ class _SelectChildPageState extends State<SelectChildPage> {
                                   .toString());
                           await getSharedContoller.sharedPreferenceData();
                           await childController.getChildInfo();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(29, 105, 90, 107),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                            textStyle: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
+                        }),
+                        child: Container(
+                          margin: const EdgeInsets.all(10),
+                          decoration: Utils.gradientBtnDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  minRadius: 35,
+                                  backgroundImage: NetworkImage(
+                                    "https://i.imgur.com/7PqjiH7.jpeg",
+                                    scale: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Name: ${childController.childList.data![index].studentName}',
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                    Text(
+                                      'Class: ${childController.childList.data![index].className}',
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                    Text(
+                                      'Section: ${childController.childList.data![index].sectionName}',
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                    Text(
+                                      'Roll No.: ${childController.childList.data![index].rollNo}',
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -169,10 +174,7 @@ class _SelectChildPageState extends State<SelectChildPage> {
                       Align(
                         alignment: Alignment.bottomRight,
                         // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
+                        child: ElevatedButton(
                           onPressed: () {
                             Get.back();
                             //Navigator.of(context).pop();
@@ -193,10 +195,7 @@ class _SelectChildPageState extends State<SelectChildPage> {
                       Align(
                         alignment: Alignment.bottomRight,
                         // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
+                        child: ElevatedButton(
                           onPressed: () {
                             if (Get.isDialogOpen!) Get.back();
                             exit(0);

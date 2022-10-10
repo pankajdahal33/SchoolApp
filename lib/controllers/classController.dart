@@ -7,6 +7,7 @@ import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/models/Class.dart';
 import 'package:startupapplication/models/ClassStudent.dart';
 import 'package:startupapplication/models/Section.dart';
+import 'package:startupapplication/models/TeacherSubject.dart';
 
 class ClassController extends GetxController {
   ApiRequestController controller = ApiRequestController();
@@ -16,11 +17,12 @@ class ClassController extends GetxController {
 
   var isLoadingClass = false.obs;
   var isLoadingSection = false.obs;
+  var isLoadingSubject = false.obs;
   var isLoading = false.obs;
-  var classList = Class();
+  var classList = <ClassList>[];
   var classSectionList = Section();
   var classStudentList = ClassStudent();
-  var classTeacherSubjectList;
+  var classTeacherSubjectList = TeacherSubject();
 
   getClassList() async {
     try {
@@ -84,10 +86,10 @@ class ClassController extends GetxController {
     }
   }
 
-  getTeacherAllSubject() {
+  getTeacherAllSubject() async {
     try {
-      isLoading(true);
-      var response = controller.getTeacherAllSubject(
+      isLoadingSubject(true);
+      var response = await controller.getTeacherAllSubject(
         teacherId: getSharedContoller.userId,
         token: getSharedContoller.token,
       );
@@ -97,7 +99,7 @@ class ClassController extends GetxController {
     } catch (e) {
       Utils.showToast(e.toString());
     } finally {
-      isLoading(false);
+      isLoadingSubject(false);
     }
   }
 }

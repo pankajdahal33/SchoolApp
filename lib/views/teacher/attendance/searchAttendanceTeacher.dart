@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/attendanceController.dart';
@@ -73,8 +75,8 @@ class _SearchAttendaceTeacherState extends State<SearchAttendaceTeacher> {
                           await getSharedContoller.sharedPreferenceData();
                           classController.getTeacherClassSection();
                         },
-                        items: classController.classList.data != null
-                            ? classController.classList.data!.teacherClasses!
+                        items: classController.classList != null
+                            ? classController.classList
                                 .map<DropdownMenuItem<String>>((value) {
                                 return DropdownMenuItem<String>(
                                   value: value.classId.toString(),

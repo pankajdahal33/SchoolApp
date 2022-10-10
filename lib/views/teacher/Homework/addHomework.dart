@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/classController.dart';
@@ -49,7 +51,7 @@ class _AddHomeworkState extends State<AddHomework> {
                       child: DropdownButton<String>(
                         hint: Text('Select Class',
                             style: Theme.of(context).textTheme.headline4),
-                        value: selectedClass,
+                        value: selectedSubject,
                         icon: const Icon(Icons.arrow_drop_down),
                         isExpanded: true,
                         iconSize: 24,
@@ -64,15 +66,15 @@ class _AddHomeworkState extends State<AddHomework> {
                             .copyWith(color: Theme.of(context).primaryColor),
                         onChanged: (String? newValue) async {
                           setState(() {
-                            selectedClass = newValue!;
+                            selectedSubject = newValue!;
                           });
                           Utils.saveStringValue(
-                              'teacherClassId', selectedClass);
+                              'teacherClassSubjectId', selectedSubject);
                           await getSharedContoller.sharedPreferenceData();
                           classController.getTeacherClassSection();
                         },
-                        items: classController.classList.data != null
-                            ? classController.classList.data!.teacherClasses!
+                        items: classController.classList != null
+                            ? classController.classList
                                 .map<DropdownMenuItem<String>>((value) {
                                 return DropdownMenuItem<String>(
                                   value: value.classId.toString(),
@@ -119,13 +121,13 @@ class _AddHomeworkState extends State<AddHomework> {
                             .textTheme
                             .headline4!
                             .copyWith(color: Theme.of(context).primaryColor),
-                        onChanged: (String? newValue) {
+                        onChanged: (String? newValue) async {
                           setState(() {
                             selectedSection = newValue!;
                           });
                           Utils.saveStringValue(
                               'teacherClassSectionId', selectedSection);
-                          getSharedContoller.sharedPreferenceData();
+                          await getSharedContoller.sharedPreferenceData();
                           classController.getTeacherAllSubject();
                         },
                         items: classController.classSectionList.data != null
@@ -137,6 +139,62 @@ class _AddHomeworkState extends State<AddHomework> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
                                     child: Text(value.sectionName.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4),
+                                  ),
+                                );
+                              }).toList()
+                            : [],
+                      ),
+                    ),
+                  ),
+          ),
+          Obx(
+            () => classController.isLoadingSubject.value
+                ? LoadingWidget()
+                : Card(
+                    child: Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      child: DropdownButton<String>(
+                        hint: Text('Select Subject',
+                            style: Theme.of(context).textTheme.headline4),
+                        value: selectedClass,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        isExpanded: true,
+                        iconSize: 24,
+                        elevation: 16,
+                        underline: Container(
+                          height: 2,
+                          color: Theme.of(context).backgroundColor,
+                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4!
+                            .copyWith(color: Theme.of(context).primaryColor),
+                        onChanged: (String? newValue) async {
+                          setState(() {
+                            selectedClass = newValue!;
+                          });
+                          // Utils.saveStringValue('teacherClassSubjectId',
+                          //     selectedSubject); // ya subject id save garnu parxa
+                          // await getSharedContoller.sharedPreferenceData();
+                        },
+                        items: classController.classTeacherSubjectList.data !=
+                                null
+                            ? classController
+                                .classTeacherSubjectList.data!.subjectsName!
+                                .map<DropdownMenuItem<String>>((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.subjectId.toString(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                        value.subjectName.toString() +
+                                            " " +
+                                            value.subjectCode.toString(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline4),

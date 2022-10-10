@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/userController.dart';
+import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/helpers/themeService.dart';
 import 'package:startupapplication/views/components/animation.dart';
 
@@ -193,48 +194,39 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     children: [
                       Align(
                         alignment: Alignment.bottomRight,
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
-                          onPressed: () {
+                        child: InkWell(
+                          onTap: (() {
                             Get.back();
-                            //Navigator.of(context).pop();
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Text(
-                              "   No   ",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
+                          }),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: Utils.gradientBtnDecoration,
+                            child: Text('No',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
-                          color: Theme.of(context).backgroundColor,
-                          onPressed: () async {
+                        child: InkWell(
+                          onTap: (() async {
                             userController.logout();
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text(
-                              " YES ",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
+                          }),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: Utils.gradientBtnDecoration,
+                            child: Text('Yes',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),

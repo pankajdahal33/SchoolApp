@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:startupapplication/helpers/Utils.dart';
 
 class DialogHelper {
   //show error dialog
@@ -29,13 +30,27 @@ class DialogHelper {
                 SizedBox(
                   width: 250,
                   height: 50,
-                  child: ElevatedButton(
-                      onPressed: (() async {
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: (() async {
                         Get.back(closeOverlays: false);
                         if (Get.isDialogOpen!) Get.back();
                       }),
-                      child: Text('OKey')),
-                )
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        width: 250,
+                        decoration: Utils.gradientBtnDecoration,
+                        child: Text('Okey',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

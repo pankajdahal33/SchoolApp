@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:startupapplication/controllers/ApiBaseController/baseController.dart';
 import 'package:startupapplication/models/ChildInfo.dart';
 import 'package:startupapplication/models/Childrens.dart';
@@ -13,6 +15,7 @@ import 'package:startupapplication/models/Notification.dart';
 import 'package:startupapplication/models/Profile.dart';
 import 'package:startupapplication/models/Section.dart';
 import 'package:startupapplication/models/TeacherNotice.dart';
+import 'package:startupapplication/models/TeacherSubject.dart';
 import 'package:startupapplication/services/base_client.dart';
 
 class ApiRequestController with BaseController {
@@ -143,7 +146,9 @@ class ApiRequestController with BaseController {
       return;
     } else {
       print(response);
-      return Class.fromJson(response);
+      return List<ClassList>.from(
+          json.decode(response).map((x) => ClassList.fromMap(x)));
+      //return ClassList.fromJson(response);
     }
   }
 
@@ -188,7 +193,7 @@ class ApiRequestController with BaseController {
       return;
     } else {
       print(response);
-      //return Section.fromJson(response);
+      return TeacherSubject.fromJson(response);
     }
   }
 

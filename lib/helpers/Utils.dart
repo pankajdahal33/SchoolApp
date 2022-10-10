@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:startupapplication/helpers/app_config.dart' as config;
 
 class Utils extends GetxController {
   static Future<bool> saveBooleanValue(String key, bool value) async {
@@ -66,7 +67,7 @@ class Utils extends GetxController {
     Fluttertoast.showToast(
       msg: message,
       textColor: Colors.white,
-      backgroundColor: Colors.purple,
+      backgroundColor: config.Colors().mainColor(1),
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
     );
@@ -76,8 +77,8 @@ class Utils extends GetxController {
       borderRadius: BorderRadius.circular(25.0),
       gradient: LinearGradient(
         colors: [
-          Color(0xff7C32FF),
-          Color(0xffC738D8),
+          config.Colors().mainColor(1),
+          config.Colors().accentColor(.8),
         ],
       ));
 
