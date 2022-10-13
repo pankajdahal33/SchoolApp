@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:startupapplication/controllers/ApiBaseController/apiRequestController.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/helpers/Utils.dart';
+import 'package:startupapplication/models/ChangePassword.dart';
 import 'package:startupapplication/models/Login.dart';
 import 'package:startupapplication/models/Profile.dart';
 import 'package:startupapplication/routes/app_pages.dart';
@@ -13,10 +14,14 @@ class UserController extends GetxController {
   String? email;
   String? password;
   String? schoolId;
+  String? currentPassword;
+  String? newPassword;
+  String? confirmPassword;
 
   var isLoading = false.obs;
   var loginData = Login();
   var profileData = Profile();
+  var changePasswordResponse = ChangePassword();
 
   //getProfile
   login() async {
@@ -100,6 +105,36 @@ class UserController extends GetxController {
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  changePassword() async {
+    try {
+      isLoading(true);
+      var response = await controller.changePassword(
+        userId: getSharedContoller.roleId == "3"
+            ? getSharedContoller.childId
+            : getSharedContoller.userId,
+        token: getSharedContoller.token,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      );
+
+      if (response != null) {
+        changePasswordResponse = response;
+        //Sucess snackbar
+        if (changePasswordResponse.success! == true) {
+          Utils.showToast(changePasswordResponse.message!);
+          Get.back();
+        } else {
+          Utils.showToast(changePasswordResponse.message!);
+        }
+      }
+    } catch (e) {
+      Utils.showToast(changePasswordResponse.message!);
     } finally {
       isLoading(false);
     }

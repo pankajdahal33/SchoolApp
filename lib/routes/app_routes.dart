@@ -19,6 +19,7 @@ abstract class Routes {
   static const ADDHOMEWORK = _Paths.ADDHOMEWORK;
   static const HOMEWORKLIST = _Paths.HOMEWORKLIST;
   static const TEACHERNOTIFICATION = _Paths.TEACHERNOTIFICATION;
+  static const TEACHERCHANGEPASSWORD = _Paths.TEACHERCHANGEPASSWORD;
 
   static const STUDENTHOME = _Paths.STUDENTHOME;
   static const STUDENTNOTIFICATION = _Paths.STUDENTNOTIFICATION;
@@ -29,6 +30,10 @@ abstract class Routes {
   static const STUDENTENOTICE = _Paths.STUDENTNOTICE;
   static const STUDENTENOTICEDETAIL = _Paths.STUDENTNOTICEDETAIL;
   static const STUDENTHOMEWORK = _Paths.STUDENTHOMEWORK;
+  static const STUDENTEXAMPAGE = _Paths.STUDENTEXAMPAGE;
+  static const STUDENTEXAMSCHEDULE = _Paths.STUDENTEXAMSCHEDULE;
+  static const STUDENTEXAMRESULT = _Paths.STUDENTEXAMRESULT;
+  static const STUDENTCHANGEPASSWORD = _Paths.STUDENTCHANGEPASSWORD;
 }
 
 abstract class _Paths {
@@ -49,6 +54,7 @@ abstract class _Paths {
   static const ADDHOMEWORK = '/add-homework';
   static const HOMEWORKLIST = '/homework-list';
   static const TEACHERNOTIFICATION = '/teacher-notification';
+  static const TEACHERCHANGEPASSWORD = '/teacher-change-password';
 
   static const STUDENTHOME = '/student-home';
   static const STUDENTNOTIFICATION = '/student-notification';
@@ -59,4 +65,8 @@ abstract class _Paths {
   static const STUDENTNOTICE = '/student-notice';
   static const STUDENTNOTICEDETAIL = '/student-notice-detail';
   static const STUDENTHOMEWORK = '/student-homework';
+  static const STUDENTEXAMPAGE = '/student-exam-page';
+  static const STUDENTEXAMSCHEDULE = '/student-exam-schedule';
+  static const STUDENTEXAMRESULT = '/student-exam-result';
+  static const STUDENTCHANGEPASSWORD = '/student-change-password';
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "508807182020",
+    "project_id": "sikshya365-4a167",
+    "storage_bucket": "sikshya365-4a167.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508807182020:android:5fd5f8bcc84ae109e0bb91",
+        "android_client_info": {
+          "package_name": "com.aplustech.sikshya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508807182020-816m82lu4mu5jevvpr36ot7dke8gqobn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC144zR6mQWOteA5VbyJxMMluMk48ij13s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508807182020-816m82lu4mu5jevvpr36ot7dke8gqobn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

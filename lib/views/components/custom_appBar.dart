@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 import 'package:startupapplication/helpers/Utils.dart';
 import 'package:startupapplication/helpers/themeService.dart';
+import 'package:startupapplication/routes/app_pages.dart';
 import 'package:startupapplication/views/components/animation.dart';
 
 class CustomAppBar extends StatefulWidget {
@@ -19,6 +21,7 @@ class CustomAppBar extends StatefulWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   UserController userController = Get.put(UserController());
+  GetSharedContoller getSharedContoller = Get.find();
   bool? isDarkMode = true;
 
   @override
@@ -72,7 +75,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   }),
                   icon: Icon(
                     Icons.arrow_back,
-                    size: 35,
+                    size: 30,
                   ),
                 ),
                 bottom: 30,
@@ -88,6 +91,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
         Positioned(
             child: Row(
               children: [
+                getSharedContoller.roleId == "3"
+                    ? IconButton(
+                        onPressed: (() async {
+                          Get.toNamed(Routes.SELECTCHILD);
+                        }),
+                        icon: Icon(
+                          Icons.switch_account,
+                          size: 30,
+                        ),
+                      )
+                    : Container(),
                 IconButton(
                   onPressed: (() {
                     ThemeService().switchTheme();
@@ -98,11 +112,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   icon: !isDarkMode!
                       ? Icon(
                           Icons.dark_mode,
-                          size: 35,
+                          size: 30,
                         )
                       : Icon(
                           Icons.light_mode,
-                          size: 35,
+                          size: 30,
                         ),
                 ),
                 IconButton(
@@ -111,7 +125,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   }),
                   icon: Icon(
                     Icons.logout,
-                    size: 35,
+                    size: 30,
                   ),
                 ),
               ],

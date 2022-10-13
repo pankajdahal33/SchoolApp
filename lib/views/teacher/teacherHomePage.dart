@@ -129,17 +129,17 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                               Text('Attendance')
                             ])),
                       ),
-                      InkWell(
-                        onTap: (() {}),
-                        child: Container(
-                            child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                              Icon(Icons.schedule),
-                              Text('Routine')
-                            ])),
-                      ),
+                      // InkWell(
+                      //   onTap: (() {}),
+                      //   child: Container(
+                      //       child: Column(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceEvenly,
+                      //           children: [
+                      //         Icon(Icons.schedule),
+                      //         Text('Routine')
+                      //       ])),
+                      // ),
                       InkWell(
                         onTap: (() {
                           Get.toNamed(Routes.TEACHERPROFILE);

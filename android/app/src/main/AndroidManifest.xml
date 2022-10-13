@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.startupapplication">
+    package="com.aplustech.sikshya">
 
     <uses-permission android:name="android.permission.INTERNET" />
    <application

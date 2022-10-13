@@ -21,23 +21,20 @@ class _StudentHomePageState extends State<StudentHomePage> {
     return false;
   }
 
-  final buttonNames = [
-    "Attendance",
-    "Notice",
-    "FeeS",
-    "Homework",
-  ];
+  final buttonNames = ["Attendance", "Notice", "FeeS", "Homework", "Exam"];
   final buttonIcons = [
     Icons.fingerprint,
     Icons.medical_information_sharp,
     Icons.money,
     Icons.home_work,
+    Icons.assignment
   ];
   final buttonFunctions = [
     Routes.STUDENTATTENDANCE,
     Routes.STUDENTENOTICE,
     Routes.STUDENTFEE,
-    Routes.STUDENTHOMEWORK
+    Routes.STUDENTHOMEWORK,
+    Routes.STUDENTEXAMPAGE
   ];
   int? currentCard;
   @override
@@ -150,32 +147,32 @@ class _StudentHomePageState extends State<StudentHomePage> {
                               Text('Fees')
                             ])),
                       ),
-                      InkWell(
-                        onTap: (() {
-                          setState(() {
-                            currentIndex = 3;
-                          });
-                        }),
-                        child: Container(
-                            child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                              Icon(
-                                Icons.schedule,
-                                color: currentIndex == 3
-                                    ? Theme.of(context).primaryColor
-                                    : null,
-                              ),
-                              Text('Routine')
-                            ])),
-                      ),
+                      // InkWell(
+                      //   onTap: (() {
+                      //     setState(() {
+                      //       currentIndex = 3;
+                      //     });
+                      //   }),
+                      //   child: Container(
+                      //       child: Column(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceEvenly,
+                      //           children: [
+                      //         Icon(
+                      //           Icons.schedule,
+                      //           color: currentIndex == 3
+                      //               ? Theme.of(context).primaryColor
+                      //               : null,
+                      //         ),
+                      //         Text('Routine')
+                      //       ])),
+                      // ),
                       InkWell(
                         onTap: (() async {
                           // userController.getProfile();
                           Get.toNamed(Routes.STUDENTPROFILE);
                           setState(() {
-                            currentIndex = 4;
+                            currentIndex = 3;
                           });
                         }),
                         child: Container(

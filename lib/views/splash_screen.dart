@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
@@ -16,8 +17,16 @@ class SplashScreen extends StatefulWidget {
 class SplashScreenState extends State<SplashScreen> {
   GetSharedContoller getSharedContoller = Get.put(GetSharedContoller());
   UserController userController = Get.find();
+
   @override
   void initState() {
+    FirebaseMessaging _firebaseMessaging =
+        FirebaseMessaging.instance; // Change here
+    _firebaseMessaging.getToken().then((token) {
+      print("token is $token");
+    }, onError: (e) {
+      print("error is $e");
+    });
     super.initState();
     checkAuth();
   }

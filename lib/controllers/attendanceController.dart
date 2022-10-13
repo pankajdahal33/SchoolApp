@@ -176,13 +176,12 @@ class AttendanceController extends GetxController {
   //     var response = controller.sendNotificationToSection(
   //       title: 'Attendance',
   //       body: 'Attendance sunmitted',
-  //       classId: getSharedContoller.teacherClassId,
-  //       sectionId: getSharedContoller.teacherClassSectionId,
+  //       classId: 1.toString(),
+  //       sectionId: 1.toString(),
   //       token: getSharedContoller.token,
   //     );
   //     if (response != null) {
   //       print('Sucessfully send notification to section');
-
   //     }
   //   } catch (e) {
   //     Get.snackbar("Error", e.toString(),
@@ -193,5 +192,4 @@ class AttendanceController extends GetxController {
   //     isLoading(false);
   //   }
   // }
-
 }

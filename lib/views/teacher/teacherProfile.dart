@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
+import 'package:startupapplication/helpers/Utils.dart';
+import 'package:startupapplication/routes/app_pages.dart';
 import 'package:startupapplication/views/components/custom_appBar.dart';
 import 'package:startupapplication/views/components/loadingWidget.dart';
 
@@ -82,6 +84,21 @@ class _TeacherProfileState extends State<TeacherProfile> {
                               ],
                             ),
                           ],
+                        ),
+                        InkWell(
+                          onTap: (() {
+                            Get.toNamed(Routes.TEACHERCHANGEPASSWORD);
+                          }),
+                          child: Container(
+                              alignment: Alignment.center,
+                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              decoration: Utils.gradientBtnDecoration,
+                              child: Text(
+                                'Change Password',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )),
                         ),
                       ],
                     ),

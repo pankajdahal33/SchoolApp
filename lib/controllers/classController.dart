@@ -4,9 +4,9 @@ import 'package:startupapplication/controllers/ApiBaseController/apiRequestContr
 import 'package:startupapplication/controllers/getSharedData.dart';
 import 'package:startupapplication/controllers/userController.dart';
 import 'package:startupapplication/helpers/Utils.dart';
-import 'package:startupapplication/models/Class.dart';
 import 'package:startupapplication/models/ClassStudent.dart';
 import 'package:startupapplication/models/Section.dart';
+import 'package:startupapplication/models/TeacherClass.dart';
 import 'package:startupapplication/models/TeacherSubject.dart';
 
 class ClassController extends GetxController {
@@ -19,7 +19,7 @@ class ClassController extends GetxController {
   var isLoadingSection = false.obs;
   var isLoadingSubject = false.obs;
   var isLoading = false.obs;
-  var classList = <ClassList>[];
+  var classList = TeacherClass();
   var classSectionList = Section();
   var classStudentList = ClassStudent();
   var classTeacherSubjectList = TeacherSubject();

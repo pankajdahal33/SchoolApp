@@ -74,7 +74,7 @@ class _AddHomeworkState extends State<AddHomework> {
                           classController.getTeacherClassSection();
                         },
                         items: classController.classList != null
-                            ? classController.classList
+                            ? classController.classList.data!.teacherClasses!
                                 .map<DropdownMenuItem<String>>((value) {
                                 return DropdownMenuItem<String>(
                                   value: value.classId.toString(),

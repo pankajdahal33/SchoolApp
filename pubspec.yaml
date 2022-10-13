@@ -24,11 +24,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   file_picker: null
+  firebase_core: ^1.24.0
+  firebase_messaging: ^13.1.0
   flutter:
     sdk: flutter
   flutter_cache_manager: ^3.3.0
   flutter_calendar_carousel: ^2.4.0
   flutter_html: ^2.2.1
+  flutter_local_notifications: ^12.0.1+1
   fluttertoast: ^8.0.9
   get: 4.6.5
   get_storage: ^2.0.3

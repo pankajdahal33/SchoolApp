@@ -1,4 +1,4 @@
-package com.example.startupapplication
+package com.aplustech.sikshya
 
 import io.flutter.embedding.android.FlutterActivity
 

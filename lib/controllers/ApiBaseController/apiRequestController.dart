@@ -1,9 +1,13 @@
 import 'dart:convert';
 
 import 'package:startupapplication/controllers/ApiBaseController/baseController.dart';
+import 'package:startupapplication/models/ChangePassword.dart';
 import 'package:startupapplication/models/ChildInfo.dart';
 import 'package:startupapplication/models/Childrens.dart';
-import 'package:startupapplication/models/Class.dart';
+import 'package:startupapplication/models/ExamResult.dart';
+import 'package:startupapplication/models/ExamSchedule.dart';
+import 'package:startupapplication/models/ExamType.dart';
+import 'package:startupapplication/models/TeacherClass.dart';
 import 'package:startupapplication/models/ClassAttendance.dart';
 import 'package:startupapplication/models/ClassStudent.dart';
 import 'package:startupapplication/models/Fee.dart';
@@ -21,6 +25,7 @@ import 'package:startupapplication/services/base_client.dart';
 class ApiRequestController with BaseController {
   static String baseUrl = "https://dummyuser.ml/";
   static String apiBaseUrl = baseUrl + "api/";
+  static String firebaseUrl = baseUrl + "https://fcm.googleapis.com";
 
 // post Login
   login({String? email, String? password}) async {
@@ -57,6 +62,33 @@ class ApiRequestController with BaseController {
     } else {
       print(response);
       return Profile.fromJson(response);
+    }
+  }
+
+  changePassword({
+    String? userId,
+    String? token,
+    String? currentPassword,
+    String? newPassword,
+    String? confirmPassword,
+  }) async {
+    var endPoint =
+        "change-password?current_password=$currentPassword&new_password=$newPassword&confirm_password=$confirmPassword&id=$userId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return ChangePassword.fromJson(response);
     }
   }
 
@@ -146,9 +178,7 @@ class ApiRequestController with BaseController {
       return;
     } else {
       print(response);
-      return List<ClassList>.from(
-          json.decode(response).map((x) => ClassList.fromMap(x)));
-      //return ClassList.fromJson(response);
+      return TeacherClass.fromJson(response);
     }
   }
 
@@ -307,7 +337,7 @@ class ApiRequestController with BaseController {
     String? token,
     String? title,
     String? body,
-  }) {
+  }) async {
     var endPoint =
         "homework-notification-api?body=$body&title=$title&class_id=$classId&section_id=$sectionId";
     var headers = {
@@ -316,7 +346,15 @@ class ApiRequestController with BaseController {
       'Authorization': '$token'
     };
 
-    BaseClient().get(apiBaseUrl, endPoint, headers).catchError(handelError);
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return response;
+    }
   }
 
   getTeacherNoticeList({
@@ -491,6 +529,108 @@ class ApiRequestController with BaseController {
     } else {
       print(response);
       //return TeacherHomework.fromJson(response);
+    }
+  }
+
+  getStudentExamTypeList({
+    String? studentId,
+    String? token,
+  }) async {
+    var endPoint = "student-exam-schedule/$studentId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return ExamTypeList.fromJson(response);
+    }
+  }
+
+  getExamScheduleById({
+    String? examId,
+    String? token,
+  }) async {
+    var endPoint = "exam-routine-report";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+    var body = jsonEncode({
+      "exam": examId,
+    });
+
+    var response = await BaseClient()
+        .post(apiBaseUrl, endPoint, headers, body)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return ExamSchdeule.fromJson(response);
+    }
+  }
+
+  getExamResultById({
+    String? studentId,
+    String? examId,
+    String? token,
+  }) async {
+    var endPoint = "exam-result/$studentId/$examId";
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': '$token'
+    };
+
+    var response = await BaseClient()
+        .get(apiBaseUrl, endPoint, headers)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return ExamResult.fromJson(response);
+    }
+  }
+
+  sendNotification({dynamic deviceToken, String? title, String? body}) async {
+    var payloadObj = jsonEncode({
+      "registration_ids": deviceToken,
+      "notification": {
+        "body": body!,
+        "title": title!,
+        "android_channel_id": "pos",
+        "image":
+            "https://cdn2.vectorstock.com/i/1000x1000/23/91/small-size-emoticon-vector-9852391.jpg",
+        "sound": true
+      }
+    });
+    var endPoint = "/fcm/send";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+          'key=AAAAdndFdsQ:APA91bGI1jnub_Rs4O_yqOEfC_ICAOetQBLSBpTHCdHg5r-orQAtMe4G71bVASUllJBuFd53Jrb_UrNUE9VKCgA_SjfOwMFK5T6nJDKPNqESjhvP9Emrv6W1_BT6f2f04vibXg1vPEZl'
+    };
+    var response = await BaseClient()
+        .post(firebaseUrl, endPoint, headers, payloadObj)
+        .catchError(handelError);
+
+    if (response == null) {
+      return;
+    } else {
+      print(response);
+      return response;
     }
   }
 }

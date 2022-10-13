@@ -6,6 +6,7 @@ import 'package:startupapplication/bindings/UserBinding.dart';
 import 'package:startupapplication/bindings/attendanceBinding.dart';
 import 'package:startupapplication/bindings/notificationBinding.dart';
 import 'package:startupapplication/bindings/selectChildBinding.dart';
+import 'package:startupapplication/bindings/studentExamBinding.dart';
 import 'package:startupapplication/bindings/studentFeeBinding.dart';
 import 'package:startupapplication/bindings/studentHomeworkBinding.dart';
 import 'package:startupapplication/bindings/studentNoticeBinding.dart';
@@ -17,10 +18,14 @@ import 'package:startupapplication/bindings/teacherProfileBinding.dart';
 import 'package:startupapplication/views/loginPage.dart';
 import 'package:startupapplication/views/parent/selectChildPage.dart';
 import 'package:startupapplication/views/splash_screen.dart';
+import 'package:startupapplication/views/student/Exam/studentExamPage.dart';
+import 'package:startupapplication/views/student/Exam/studentExamResult.dart';
+import 'package:startupapplication/views/student/Exam/studentExamSchedule.dart';
 import 'package:startupapplication/views/student/Homework/studentHomework.dart';
 import 'package:startupapplication/views/student/Notice/studentNoticeDetailPage.dart';
 import 'package:startupapplication/views/student/Notice/studentNoticePage.dart';
 import 'package:startupapplication/views/student/studentAttendance.dart';
+import 'package:startupapplication/views/student/studentChangePassword.dart';
 import 'package:startupapplication/views/student/studentFee.dart';
 import 'package:startupapplication/views/student/studentHomePage.dart';
 import 'package:startupapplication/views/student/studentNotificatiion.dart';
@@ -34,6 +39,7 @@ import 'package:startupapplication/views/teacher/attendance/checkClassAttendance
 import 'package:startupapplication/views/teacher/attendance/classAttendanceTeacher.dart';
 import 'package:startupapplication/views/teacher/attendance/searchAttendanceTeacher.dart';
 import 'package:startupapplication/views/teacher/attendance/teacherAttendance.dart';
+import 'package:startupapplication/views/teacher/teacherChangePassword.dart';
 
 import 'package:startupapplication/views/teacher/teacherHomePage.dart';
 import 'package:startupapplication/views/teacher/teacherNotificatiion.dart';
@@ -124,6 +130,11 @@ class AppPages {
       binding: NotificationBinding(),
     ),
     GetPage(
+      name: _Paths.TEACHERCHANGEPASSWORD,
+      page: () => TeacherChangePassword(),
+      binding: UserBinding(),
+    ),
+    GetPage(
       name: _Paths.STUDENTHOME,
       page: () => StudentHomePage(),
       binding: StudentHomeBinding(),
@@ -162,6 +173,26 @@ class AppPages {
       name: _Paths.STUDENTNOTIFICATION,
       page: () => StudentNotification(),
       binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTEXAMPAGE,
+      page: () => StudentExamPage(),
+      binding: StudentExamBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTEXAMRESULT,
+      page: () => StudentExamResult(),
+      binding: StudentExamBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTEXAMSCHEDULE,
+      page: () => StudentExamSchedule(),
+      binding: StudentExamBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENTCHANGEPASSWORD,
+      page: () => StudentChangePassword(),
+      binding: UserBinding(),
     ),
   ];
 }

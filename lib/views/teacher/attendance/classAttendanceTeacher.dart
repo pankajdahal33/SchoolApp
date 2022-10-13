@@ -76,19 +76,25 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                             setState(() {
                               selectedClass = newValue!;
                             });
-                            Utils.saveStringValue(
-                                'teacherClassId', selectedClass);
+                            Utils.saveStringValue('teacherClassId',
+                                selectedClass.toString().split("-").first);
+                            Utils.saveStringValue('teacherClassSectionId',
+                                selectedClass.toString().split("-").last);
                             await getSharedContoller.sharedPreferenceData();
-                            classController.getTeacherClassSection();
                           },
                           items: classController.classList != null
-                              ? classController.classList
+                              ? classController.classList.data!.teacherClasses!
                                   .map<DropdownMenuItem<String>>((value) {
                                   return DropdownMenuItem<String>(
-                                    value: value.classId.toString(),
+                                    value: value.classId.toString() +
+                                        "-" +
+                                        value.sectionId.toString(),
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(value.className.toString(),
+                                      child: Text(
+                                          value.className.toString() +
+                                              "   Setion: " +
+                                              value.sectionName.toString(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline4),
@@ -100,66 +106,66 @@ class _ClassAttendaceTeacherState extends State<ClassAttendaceTeacher> {
                       ),
                     ),
 
-                    classController.isLoadingSection.value
-                        ? Container(
-                            height: 60,
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Card(),
-                          )
-                        : Card(
-                            child: Container(
-                              height: 60,
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: DropdownButton<String>(
-                                hint: Text('Select Section',
-                                    style:
-                                        Theme.of(context).textTheme.headline4),
-                                value: selectedSection,
-                                icon: const Icon(Icons.arrow_drop_down),
-                                isExpanded: true,
-                                iconSize: 24,
-                                elevation: 16,
-                                underline: Container(
-                                  height: 2,
-                                  color: Theme.of(context).backgroundColor,
-                                ),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4!
-                                    .copyWith(
-                                        color: Theme.of(context).primaryColor),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedSection = newValue!;
-                                  });
-                                  Utils.saveStringValue(
-                                      'teacherClassSectionId', selectedSection);
-                                  getSharedContoller.sharedPreferenceData();
-                                },
-                                items: classController.classSectionList.data !=
-                                        null
-                                    ? classController
-                                        .classSectionList.data!.teacherSections!
-                                        .map<DropdownMenuItem<String>>((value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value.sectionId.toString(),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text(
-                                                value.sectionName.toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline4),
-                                          ),
-                                        );
-                                      }).toList()
-                                    : [],
-                              ),
-                            ),
-                          ),
+                    // classController.isLoadingSection.value
+                    //     ? Container(
+                    //         height: 60,
+                    //         width: MediaQuery.of(context).size.width,
+                    //         padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    //         child: Card(),
+                    //       )
+                    //     : Card(
+                    //         child: Container(
+                    //           height: 60,
+                    //           width: MediaQuery.of(context).size.width,
+                    //           padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    //           child: DropdownButton<String>(
+                    //             hint: Text('Select Section',
+                    //                 style:
+                    //                     Theme.of(context).textTheme.headline4),
+                    //             value: selectedSection,
+                    //             icon: const Icon(Icons.arrow_drop_down),
+                    //             isExpanded: true,
+                    //             iconSize: 24,
+                    //             elevation: 16,
+                    //             underline: Container(
+                    //               height: 2,
+                    //               color: Theme.of(context).backgroundColor,
+                    //             ),
+                    //             style: Theme.of(context)
+                    //                 .textTheme
+                    //                 .headline4!
+                    //                 .copyWith(
+                    //                     color: Theme.of(context).primaryColor),
+                    //             onChanged: (String? newValue) {
+                    //               setState(() {
+                    //                 selectedSection = newValue!;
+                    //               });
+                    //               Utils.saveStringValue(
+                    //                   'teacherClassSectionId', selectedSection);
+                    //               getSharedContoller.sharedPreferenceData();
+                    //             },
+                    //             items: classController.classSectionList.data !=
+                    //                     null
+                    //                 ? classController
+                    //                     .classSectionList.data!.teacherSections!
+                    //                     .map<DropdownMenuItem<String>>((value) {
+                    //                     return DropdownMenuItem<String>(
+                    //                       value: value.sectionId.toString(),
+                    //                       child: Padding(
+                    //                         padding: const EdgeInsets.only(
+                    //                             left: 8.0),
+                    //                         child: Text(
+                    //                             value.sectionName.toString(),
+                    //                             style: Theme.of(context)
+                    //                                 .textTheme
+                    //                                 .headline4),
+                    //                       ),
+                    //                     );
+                    //                   }).toList()
+                    //                 : [],
+                    //           ),
+                    //         ),
+                    //       ),
 
                     Card(
                       child: Container(
